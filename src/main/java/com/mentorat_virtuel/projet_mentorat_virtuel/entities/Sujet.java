@@ -1,6 +1,7 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,72 @@ public class Sujet implements Serializable {
     private Date createdAt;
 
     @ManyToMany
-    private List<Forum> forums = new ArrayList<>();
+    private List<Forum> forum = new ArrayList<>();
 
     @ManyToMany
-    List<Commentaire> commentaires = new ArrayList<>();
+    private List<Commentaire> commentaire = new ArrayList<>();
+
+    public Integer getSujetId() {
+        return sujetId;
+    }
+
+    public void setSujetId(Integer sujetId) {
+        this.sujetId = sujetId;
+    }
+
+    public Integer getForumId() {
+        return forumId;
+    }
+
+    public void setForumId(Integer forumId) {
+        this.forumId = forumId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public List<Forum> getForum() {
+        return forum;
+    }
+
+    public void setForum(List<Forum> forum) {
+        this.forum = forum;
+    }
+
+    public List<Commentaire> getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(List<Commentaire> commentaire) {
+        this.commentaire = commentaire;
+    }
 }
