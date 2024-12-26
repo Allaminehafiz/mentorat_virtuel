@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CommentaireService {
     Commentaire add(Commentaire commentaire);
-    List<Commentaire> getAll();
+    List<Commentaire> getAllcom();
     Commentaire getById(Integer commentaireId);
     Commentaire updated(Commentaire commentaire, Integer commentaireId);
     void delete(Integer commentaireId);

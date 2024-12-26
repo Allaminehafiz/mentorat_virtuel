@@ -24,29 +24,24 @@ public class CommentaireServiceImpl implements CommentaireService{
     }
 
     @Override
-    public List<Commentaire> getAll() {
+    public List<Commentaire> getAllcom() {
         return this.commentaireRepo.findAll();
     }
 
+
     @Override
     public Commentaire getById(Integer commentaireId) {
-        return this.commentaireRepo.findById(commentaireId).get();
+        return null;
     }
 
     @Override
     public Commentaire updated(Commentaire commentaire, Integer commentaireId) {
-        Commentaire commentaireToEdit = this.commentaireRepo.findById(commentaireId).get();
-        if (commentaire.getContent() != null){
-            commentaireToEdit.setContent(commentaire.getContent());
-        }
-        if (commentaire.getCreatedBy() != null){
-            commentaireToEdit.setCreatedBy(commentaire.getCreatedBy());
-        }
-        return this.commentaireRepo.saveAndFlush(commentaireToEdit);
+        return null;
     }
 
     @Override
     public void delete(Integer commentaireId) {
-        this.commentaireRepo.deleteById(commentaireId);
+
     }
+
 }

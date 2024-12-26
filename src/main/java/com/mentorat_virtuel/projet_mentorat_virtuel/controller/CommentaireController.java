@@ -19,22 +19,8 @@ public class CommentaireController {
     public ResponseEntity<Commentaire> add(@RequestBody Commentaire commentaire){
         return ResponseEntity.status(200).body(this.commentaireService.add(commentaire));
     }
-    @GetMapping(path = "commentaire/getAll")
-    public ResponseEntity<List<Commentaire>> getAll(){
-        return ResponseEntity.status(201).body(this.commentaireService.getAll());
-    }
-    @GetMapping(path = "commentaire/getById{commentaireId}")
-    public ResponseEntity<Commentaire> getbyid(@PathVariable Integer commentaireId){
-        return  ResponseEntity.status(201).body(this.commentaireService.getById(commentaireId));
-    }
-    @PutMapping(path = "commentaire/update{commentaireId}")
-    public ResponseEntity<Commentaire> update(@RequestBody Commentaire commentaire, @PathVariable Integer commentaireId){
-        return ResponseEntity.status(201).body(this.commentaireService.updated(commentaire, commentaireId));
-    }
-
-    @DeleteMapping(path = "commentaire/delete{commentaireId}")
-    public ResponseEntity<String> delete(@PathVariable Integer commentaireId){
-        this.commentaireService.delete(commentaireId);
-        return ResponseEntity.status(202).body("Deleted !!!");
+    @GetMapping( path = "commentaire/getALL")
+    public ResponseEntity<List<Commentaire>>  getAllcom(){
+        return ResponseEntity.status(201).body(this.commentaireService.getAllcom());
     }
 }

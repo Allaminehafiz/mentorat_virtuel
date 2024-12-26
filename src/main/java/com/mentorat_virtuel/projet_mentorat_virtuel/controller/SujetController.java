@@ -12,6 +12,7 @@ public class SujetController {
     private final SujetService sujetService;
 
     public SujetController(SujetService sujetService) {
+
         this.sujetService = sujetService;
     }
 
@@ -22,22 +23,22 @@ public class SujetController {
 
     @GetMapping(path = "sujet/getAll")
     public ResponseEntity<List<Sujet>> getAll(){
-        return ResponseEntity.status(200).body(this.sujetService.getAll());
+        return ResponseEntity.status(200).body(this.sujetService.getAllSujet());
     }
 
-    @GetMapping(path = "sujet/byId{sujetId}")
+    @GetMapping( path = "sujet/getbyId{sujetId}")
     public ResponseEntity<Sujet> getbyid(@PathVariable Integer sujetId){
-        return ResponseEntity.status(201).body(this.sujetService.getById(sujetId));
+        return ResponseEntity.status(200).body(this.sujetService.getById(sujetId));
     }
 
-    @PutMapping(path = "sujet/update{sujetId}")
-    public ResponseEntity<Sujet> update(@RequestBody Sujet sujet, @PathVariable Integer sujetId){
+    @PutMapping( path = "sujet/updated{sujetId}")
+    public ResponseEntity<Sujet> updated(@RequestBody Sujet sujet,@PathVariable Integer sujetId){
         return ResponseEntity.status(200).body(this.sujetService.updated(sujet, sujetId));
     }
-    @DeleteMapping(path = "sujet/delete{sujetId}")
-    public ResponseEntity<String> delete(@PathVariable Integer sujetId){
-        this.sujetService.delete(sujetId);
-        return ResponseEntity.status(202).body("Deleted successfully !");
-    }
 
+    @DeleteMapping( path = "sujet/delete{sujetId}")
+    public ResponseEntity<String> delete(Integer sujetId){
+        this.sujetService.delete(sujetId);
+        return ResponseEntity.status(202).body("Delete sucessfully !!");
+    }
 }

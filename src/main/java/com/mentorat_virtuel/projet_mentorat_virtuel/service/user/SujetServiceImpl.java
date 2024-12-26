@@ -18,7 +18,7 @@ public class SujetServiceImpl implements SujetService{
 
     @Override
     public Sujet add(Sujet sujet) {
-        sujet.setContent(sujet.getContent());
+        sujet.setTitle(sujet.getTitle());
         sujet.setContent(sujet.getContent());
         sujet.setCreatedAt(new Date());
         sujet.setCreatedBy(sujet.getCreatedBy());
@@ -26,7 +26,8 @@ public class SujetServiceImpl implements SujetService{
     }
 
     @Override
-    public List<Sujet> getAll() {
+    public List<Sujet> getAllSujet() {
+
         return this.sujetRepo.findAll();
     }
 
@@ -42,11 +43,11 @@ public class SujetServiceImpl implements SujetService{
         if (sujet.getTitle() != null){
             sujetToEdit.setTitle(sujet.getTitle());
         }
-        if (sujetToEdit.getContent() != null){
-            sujetToEdit.setContent(sujetToEdit.getContent());
+        if (sujet.getContent() != null){
+            sujetToEdit.setContent(sujet.getContent());
         }
         if (sujet.getCreatedBy() != null)
-            sujetToEdit.setCreatedBy(sujetToEdit.getCreatedBy());
+            sujetToEdit.setCreatedBy(sujet.getCreatedBy());
         return this.sujetRepo.saveAndFlush(sujetToEdit);
 
     }
