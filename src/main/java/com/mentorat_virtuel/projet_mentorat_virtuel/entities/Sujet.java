@@ -83,20 +83,4 @@ public class Sujet implements Serializable {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
-    public List<Forum> getForum() {
-        return forum;
-    }
-
-    public void setForum(List<Forum> forum) {
-        this.forum = forum;
-    }
-
-    public List<Commentaire> getCommentaire() {
-        return commentaire;
-    }
-
-    public void setCommentaire(List<Commentaire> commentaire) {
-        this.commentaire = commentaire;
-    }
 }
