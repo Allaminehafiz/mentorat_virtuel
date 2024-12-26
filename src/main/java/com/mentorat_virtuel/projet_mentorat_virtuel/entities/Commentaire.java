@@ -73,11 +73,4 @@ public class Commentaire implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public List<Sujet> getSujet() {
-        return sujet;
-    }
-
-    public void setSujet(List<Sujet> sujet) {
-        this.sujet = sujet;
-    }
 }

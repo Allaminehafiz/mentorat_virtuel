@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SujetService {
     Sujet add(Sujet sujet);
-    List<Sujet> getAll();
+    List<Sujet> getAllSujet();
     Sujet getById(Integer sujetId);
     Sujet updated(Sujet sujet, Integer sujetId);
     void delete(Integer sujetId);
