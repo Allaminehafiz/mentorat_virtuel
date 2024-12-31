@@ -23,4 +23,9 @@ public class CommentaireController {
     public ResponseEntity<List<Commentaire>>  getAllcom(){
         return ResponseEntity.status(201).body(this.commentaireService.getAllcom());
     }
+
+    @GetMapping(path = "commentaire/getbyId{commentaireId}")
+    public ResponseEntity<Commentaire> getbyId(@PathVariable Integer commentaireId){
+        return ResponseEntity.status(201).body(this.commentaireService.getById(commentaireId));
+    }
 }

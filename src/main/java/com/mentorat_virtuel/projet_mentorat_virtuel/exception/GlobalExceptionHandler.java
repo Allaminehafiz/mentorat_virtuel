@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.exception;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.exception;
 
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.dto.ErrorMessage;
@@ -32,3 +32,4 @@ public class GlobalExceptionHandler {
 
     }
 }
+*/
