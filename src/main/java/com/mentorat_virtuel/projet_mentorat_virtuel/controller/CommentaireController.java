@@ -28,4 +28,15 @@ public class CommentaireController {
     public ResponseEntity<Commentaire> getbyId(@PathVariable Integer commentaireId){
         return ResponseEntity.status(201).body(this.commentaireService.getById(commentaireId));
     }
+
+    @PutMapping(path = "commeentaire/update{commentaireId}")
+    public ResponseEntity<Commentaire> update(@RequestBody Commentaire commentaire, @PathVariable Integer commentaireId){
+        return ResponseEntity.status(201).body(this.commentaireService.updated(commentaire, commentaireId));
+    }
+
+    @DeleteMapping(path = "commentaire/delete{commentaireId}")
+    public ResponseEntity<String> delete(@PathVariable Integer commentaireId){
+        this.commentaireService.delete(commentaireId);
+        return ResponseEntity.status(202).body("Commentaire deleted Successfully !!");
+    }
 }

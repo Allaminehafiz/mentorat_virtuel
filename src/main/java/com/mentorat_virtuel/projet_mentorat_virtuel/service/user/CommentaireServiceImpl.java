@@ -31,17 +31,22 @@ public class CommentaireServiceImpl implements CommentaireService{
 
     @Override
     public Commentaire getById(Integer commentaireId) {
-        return null;
+        return this.commentaireRepo.findById(commentaireId).get();
     }
 
     @Override
     public Commentaire updated(Commentaire commentaire, Integer commentaireId) {
-        return null;
+        Commentaire commentaire1 = this.commentaireRepo.findById(commentaireId).get();
+        commentaire1.setContent(commentaire.getContent());
+        commentaire1.setCreatedBy(commentaire.getCreatedBy());
+        commentaire1.setUpdatedAt(new Date());
+
+        return this.commentaireRepo.saveAndFlush(commentaire1);
     }
 
     @Override
     public void delete(Integer commentaireId) {
-
+        this.commentaireRepo.deleteById(commentaireId);
     }
 
 }

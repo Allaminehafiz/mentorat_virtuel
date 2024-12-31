@@ -28,6 +28,7 @@ public class Commentaire implements Serializable {
     private String content;
     private Integer sujetId;
     private String createdBy;
+    private Date updatedAt;
     private Date createdAt;
 
     @ManyToMany
@@ -63,6 +64,14 @@ public class Commentaire implements Serializable {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Date getCreatedAt() {
