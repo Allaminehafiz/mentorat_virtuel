@@ -11,5 +11,5 @@ public interface MentoreService {
     Mentore getMentoreById(Integer mentoreId);
     Mentore getMentoreByEmail(String email);
     Mentore updateMentore(Mentore mentore, Integer mentoreId);
-    Mentore deleteMentore(Integer mentoreId);
+    void deleteMentore(Integer mentoreId);
 }

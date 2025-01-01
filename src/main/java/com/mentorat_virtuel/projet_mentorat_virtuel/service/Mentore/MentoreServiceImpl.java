@@ -1,11 +1,13 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.Mentore;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Mentore;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.MentoreRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MentoreServiceImpl implements MentoreService {
@@ -34,21 +36,44 @@ public class MentoreServiceImpl implements MentoreService {
 
     @Override
     public Mentore getMentoreById(Integer mentoreId) {
-        return null;
+
+        return this.mentoreRepo.findById(mentoreId).orElseThrow(
+                ()-> new ResourceNotFoundException("Mentoré not found !")
+        );
     }
 
     @Override
     public Mentore getMentoreByEmail(String email) {
-        return null;
+        return this.mentoreRepo.findByEmail(email).orElseThrow(
+                ()-> new ResourceNotFoundException("Mentoré not found !")
+        );
     }
 
     @Override
     public Mentore updateMentore(Mentore mentore, Integer mentoreId) {
-        return null;
+
+        //Rechercher le client
+        Optional<Mentore> mentoreToEdit = this.mentoreRepo.findById(mentoreId);
+        if(mentoreToEdit.isEmpty())
+            throw new ResourceNotFoundException("Mentoré not found !");
+        //Modidier les informations du clients
+        if(mentore.getFirstname()!=null)
+            mentoreToEdit.get().setFirstname(mentore.getFirstname());
+        if(mentore.getLastname()!=null)
+            mentoreToEdit.get().setLastname(mentore.getLastname());
+        if(mentore.getPhone()!=null)
+            mentoreToEdit.get().setPhone(mentore.getPhone());
+        if(mentore.getEmail()!=null)
+            mentoreToEdit.get().setEmail(mentore.getEmail());
+        mentoreToEdit.get().setUpdatedAt(new Date());
+        //Sauvegarder les modifications
+        return this.mentoreRepo.saveAndFlush(mentoreToEdit.get());
     }
 
     @Override
-    public Mentore deleteMentore(Integer mentoreId) {
-        return null;
+    public void deleteMentore(Integer mentoreId) {
+        Mentore mentore = this.mentoreRepo.findById(mentoreId)
+                .orElseThrow(()->new ResourceNotFoundException("Mentoré not found"));
+        this.mentoreRepo.delete(mentore);
     }
 }
