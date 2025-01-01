@@ -1,7 +1,7 @@
 /*package com.mentorat_virtuel.projet_mentorat_virtuel.exception;
 
 
-import com.mentorat_virtuel.projet_mentorat_virtuel.exception.dto.ErrorMessage;
+import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

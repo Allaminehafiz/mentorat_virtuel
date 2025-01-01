@@ -1,11 +1,16 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.user;
 
+import com.github.slugify.Slugify;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
+import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceExistException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.ForumRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ForumServiceImpl implements ForumService{
@@ -17,9 +22,13 @@ public class ForumServiceImpl implements ForumService{
 
     @Override
     public Forum addForum(Forum forum) {
-        forum.setTitle(forum.getTitle());
+        final Slugify slg = Slugify.builder().build();
+        Optional<Forum> forumExist = this.forumRepo.findByTitle(forum.getTitle());
+        if(forumExist.isPresent())
+            throw new RessourceExistException("Le titre existe");
+        forum.setSlug(slg.slugify(forum.getTitle()));
         forum.setDescription(forum.getDescription());
-        forum.setCreatedBy(new Date());
+        forum.setCreatedBy(forum.getCreatedBy());
         forum.setCreatedAt(new Date());
         return this.forumRepo.save(forum);
     }
@@ -36,14 +45,17 @@ public class ForumServiceImpl implements ForumService{
 
     @Override
     public Forum updated(Forum forum, Integer forumId) {
-        Forum forumToEdit = this.forumRepo.findById(forumId).get();
+        final Slugify slg = Slugify.builder().build();
+        Optional<Forum> forumToEdit = this.forumRepo.findById(forumId);
+        if(forumToEdit.isEmpty())
+            throw new RessourceNotFoundException("Le nom n'a pas ete trouve");
         if (forum.getTitle() != null){
-            forumToEdit.setTitle(forum.getTitle());
+            forumToEdit.get().setSlug(slg.slugify(forum.getTitle()));
         }
         if (forum.getDescription() != null){
-            forumToEdit.setDescription(forum.getDescription());
+            forumToEdit.get().setDescription(forum.getDescription());
         }
-        return this.forumRepo.saveAndFlush(forumToEdit);
+        return this.forumRepo.saveAndFlush(forumToEdit.get());
     }
 
     @Override

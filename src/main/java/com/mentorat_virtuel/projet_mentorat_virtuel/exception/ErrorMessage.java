@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.exception.dto;
+package com.mentorat_virtuel.projet_mentorat_virtuel.exception;
 
 import java.util.Date;
 
