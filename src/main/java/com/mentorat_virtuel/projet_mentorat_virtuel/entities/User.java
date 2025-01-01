@@ -1,14 +1,18 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,11 +26,19 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+    @Length(min = 2, max = 60, message = "le nom doit etre min 3 et max 50 caracters")
+    @NotEmpty(message = "Remplir la case")
     private String firstname;
     private String lastname;
+    @Email(message = "Your email address isn't correct")
     private String email;
     private String role;
+    @Column(nullable = false, name = "phone_number")
     private Integer phone;
+    @Temporal(TemporalType.TIME)
+    private Date updatedAt;
+    @Temporal(TemporalType.TIME)
+    private Date createdAt;
 
     public Integer getUserId() {
         return userId;

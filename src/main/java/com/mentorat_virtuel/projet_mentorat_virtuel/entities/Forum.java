@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,9 +20,17 @@ import java.util.List;
 public class Forum {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer forumId;
+    @NotEmpty(message = "Remplir la case")
     private String title;
+    private String slug;
+    @Column(columnDefinition = "text")
     private String description;
-    private Date createdBy;
+    @Length(min = 2, max = 60, message = "le nom doit etre min 3 et max 50 caracters")
+    @NotEmpty(message = "Remplir la case")
+    private String createdBy;
+    @Temporal(TemporalType.TIME)
+    private Date updatedAt;
+    @Temporal(TemporalType.TIME)
     private Date createdAt;
 
     @ManyToOne
@@ -55,16 +64,32 @@ public class Forum {
         this.description = description;
     }
 
-    public Date getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Date createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public void setCreatedAt(Date createdAt) {

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -24,11 +25,14 @@ public class Commentaire implements Serializable {
     private static final long serialVersionUID =1L;
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentaireId;
-
+    @Column(columnDefinition = "text")
     private String content;
-    private Integer sujetId;
+    @Length(min = 2, max = 60, message = "le nom doit etre min 3 et max 50 caracters")
+    @NotEmpty(message = "Remplir la case")
     private String createdBy;
+    @Temporal(TemporalType.TIME)
     private Date updatedAt;
+    @Temporal(TemporalType.TIME)
     private Date createdAt;
 
     @ManyToMany
@@ -48,14 +52,6 @@ public class Commentaire implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Integer getSujetId() {
-        return sujetId;
-    }
-
-    public void setSujetId(Integer sujetId) {
-        this.sujetId = sujetId;
     }
 
     public String getCreatedBy() {

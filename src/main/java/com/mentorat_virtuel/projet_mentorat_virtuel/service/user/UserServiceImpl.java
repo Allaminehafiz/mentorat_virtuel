@@ -4,6 +4,8 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.entities.User;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.UserRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
     private final UserRepo userRepo;
@@ -21,22 +23,30 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getAllUser() {
-        return null;
+    public List<User> getAllUser() {
+        return this.userRepo.findAll();
     }
 
     @Override
     public User getUserById(Integer userId) {
-        return null;
+        return this.userRepo.findById(userId).get();
     }
 
     @Override
     public User updatedUser(User user, Integer userId) {
-        return null;
+        User userToEdit = this.userRepo.findById(userId).get();
+        userToEdit.setFirstname(user.getFirstname());
+        userToEdit.setLastname(user.getLastname());
+        userToEdit.setEmail(user.getEmail());
+        userToEdit.setRole(user.getRole());
+        userToEdit.setPhone(user.getPhone());
+
+        return this.userRepo.saveAndFlush(userToEdit);
     }
 
     @Override
     public void deleteUser(Integer userId) {
+        this.userRepo.deleteById(userId);
 
     }
 }
