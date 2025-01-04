@@ -31,4 +31,36 @@ public class MentoreController {
                 .status(200)
                 .body(this.mentoreService.getMentores());
     }
+
+    @GetMapping(path = "mentores/get_by_id/{mentoreId}")
+    public ResponseEntity<Mentore> getMentoreById(@PathVariable Integer mentoreId){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.mentoreService.getMentoreById(mentoreId));
+    }
+
+    @GetMapping(path = "mentores/get_by_email{email}")
+    public ResponseEntity<Mentore> getMentoreByEmail(@PathVariable String email){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.mentoreService.getMentoreByEmail(email));
+    }
+
+    @PutMapping(path = "mentores/update_by_id/{mentoreId}")
+    public ResponseEntity<Mentore> updateMentoreById(@PathVariable Integer mentoreId, @Valid @RequestBody  Mentore mentore){
+
+        return ResponseEntity
+                .status(202)
+                .body(this.mentoreService.updateMentore(mentore,mentoreId));
+    }
+
+    @DeleteMapping(path = "mentores/delete_by_id/{mentoreId}")
+    public ResponseEntity<String> deleteMentoreById(@PathVariable Integer mentoreId){
+        this.mentoreService.deleteMentore(mentoreId);
+        return ResponseEntity
+                .status(202)
+                .body("Deleted successfully !");
+    }
 }
