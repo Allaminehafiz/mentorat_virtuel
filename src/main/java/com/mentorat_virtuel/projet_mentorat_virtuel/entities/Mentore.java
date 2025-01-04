@@ -1,6 +1,9 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +21,13 @@ public class Mentore implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mentoreId;
+    @NotNull
     private String firstname;
     private String lastname;
+    @NotEmpty(message = "the email does not be Empty")
     private String email;
+    @NotNull
+    @Column(nullable = false, name = "phone_number")
     private String phone;
     @Temporal(TemporalType.TIME)
     private Date createdAt;

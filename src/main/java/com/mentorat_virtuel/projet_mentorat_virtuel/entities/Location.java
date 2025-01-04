@@ -1,6 +1,7 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,8 +17,10 @@ public class Location implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer locationId;
+    @NotNull
     private String town;
     private Integer postalCode;
+    @NotNull
     private String street;
     @Temporal(TemporalType.DATE)
     private Date createdAt;
