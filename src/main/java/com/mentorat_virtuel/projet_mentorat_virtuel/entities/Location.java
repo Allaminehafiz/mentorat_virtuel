@@ -1,14 +1,10 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 
 
 @Entity
@@ -24,15 +20,15 @@ public class Location implements Serializable {
     private Integer postalCode;
     private String street;
     @Temporal(TemporalType.DATE)
-    private Instant createdAt;
+    private Date createdAt;
     @Temporal(TemporalType.DATE)
-    private Instant updatedAt;
+    private Date updatedAt;
     private Boolean status;
 
     public Location() {
     }
 
-    public Location(Integer locationId, String town, Integer postalCode, String street, Instant createdAt, Instant updatedAt, Boolean status) {
+    public Location(Integer locationId, String town, Integer postalCode, String street, Date createdAt, Date updatedAt, Boolean status) {
         this.locationId = locationId;
         this.town = town;
         this.postalCode = postalCode;
@@ -74,19 +70,19 @@ public class Location implements Serializable {
         this.street = street;
     }
 
-    public Instant getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 

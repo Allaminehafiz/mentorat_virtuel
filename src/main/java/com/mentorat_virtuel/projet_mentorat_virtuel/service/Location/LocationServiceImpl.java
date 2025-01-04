@@ -6,6 +6,7 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.LocationRepo;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<Location> getLocation() {
+    public List<Location> getLocations() {
         return this.locationRepo.findAll() ;
     }
 
@@ -51,7 +52,7 @@ public class LocationServiceImpl implements LocationService {
             locationToEdit.get().setStreet(location.getStreet());
         if (location.getPostalCode() != null)
             locationToEdit.get().setPostalCode(location.getPostalCode());
-        locationToEdit.get().setUpdatedAt(Instant.now());
+        locationToEdit.get().setUpdatedAt(new Date());
         //Sauvegarder les modifications
         return this.locationRepo.saveAndFlush(locationToEdit.get());
     }

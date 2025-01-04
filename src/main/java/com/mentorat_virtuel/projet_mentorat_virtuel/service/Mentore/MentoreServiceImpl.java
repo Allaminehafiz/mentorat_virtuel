@@ -20,7 +20,7 @@ public class MentoreServiceImpl implements MentoreService {
 
     @Override
     public Mentore addMentore(Mentore mentore) {
-       // mentore.setUpdatedAt(Date.from(Instant.now()));
+       // mentore.setUpdatedAt(Instant.now());
         mentore.setStatus(true);
         return this.mentoreRepo.save(mentore) ;
     }

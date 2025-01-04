@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LocationService {
     Location addLocation(Location location);
-    List<Location> getLocation();
+    List<Location> getLocations();
     Location getLocationById(Integer locationId);
     Location updateLocation(Location location , Integer locationId);
     void deleteLocation(Integer locationId);
