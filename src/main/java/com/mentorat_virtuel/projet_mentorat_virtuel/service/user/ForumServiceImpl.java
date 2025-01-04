@@ -2,10 +2,9 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.service.user;
 
 import com.github.slugify.Slugify;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
-import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceExistException;
-import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceExisteException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.ForumRepo;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -25,7 +24,7 @@ public class ForumServiceImpl implements ForumService{
         final Slugify slg = Slugify.builder().build();
         Optional<Forum> forumExist = this.forumRepo.findByTitle(forum.getTitle());
         if(forumExist.isPresent())
-            throw new RessourceExistException("Le titre existe");
+            throw new ResourceExisteException("Le titre existe");
         forum.setSlug(slg.slugify(forum.getTitle()));
         forum.setDescription(forum.getDescription());
         forum.setCreatedBy(forum.getCreatedBy());
@@ -48,7 +47,7 @@ public class ForumServiceImpl implements ForumService{
         final Slugify slg = Slugify.builder().build();
         Optional<Forum> forumToEdit = this.forumRepo.findById(forumId);
         if(forumToEdit.isEmpty())
-            throw new RessourceNotFoundException("Le nom n'a pas ete trouve");
+            throw new ResourceNotFoundException("Le nom n'a pas ete trouve");
         if (forum.getTitle() != null){
             forumToEdit.get().setSlug(slg.slugify(forum.getTitle()));
         }
