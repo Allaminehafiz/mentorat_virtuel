@@ -1,7 +1,9 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serial;

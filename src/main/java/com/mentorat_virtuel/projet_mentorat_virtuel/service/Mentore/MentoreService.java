@@ -7,7 +7,7 @@ import java.util.List;
 public interface MentoreService {
 
     Mentore addMentore(Mentore mentore);
-    List<Mentore> getMentore();
+    List<Mentore> getMentores();
     Mentore getMentoreById(Integer mentoreId);
     Mentore getMentoreByEmail(String email);
     Mentore updateMentore(Mentore mentore, Integer mentoreId);

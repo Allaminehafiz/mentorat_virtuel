@@ -9,5 +9,5 @@ public interface LocationService {
     List<Location> getLocation();
     Location getLocationById(Integer locationId);
     Location updateLocation(Location location , Integer locationId);
-    Location deleteLocation(Integer locationId);
+    void deleteLocation(Integer locationId);
 }
