@@ -5,6 +5,9 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.Service.FeedBackService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 public class FeedBackController {
     private FeedBackService feedBackService;
@@ -12,6 +15,7 @@ public class FeedBackController {
     public FeedBackController(FeedBackService feedBackService) {
         this.feedBackService = feedBackService;
     }
+
     @PostMapping("feedBack/add")
     public ResponseEntity<FeedBack> addFeedBack(@Valid @RequestBody FeedBack feedBack) {
         FeedBack feedBack1 = this.feedBackService.addFeedBack(feedBack);
@@ -20,18 +24,27 @@ public class FeedBackController {
                 .body(feedBack1);
 
     }
+
+    @GetMapping(path = "feedBackById/get_By_Id/{id}")
+    public ResponseEntity<FeedBack> getFeedBackById(Integer feedBackId){
+            return ResponseEntity
+                    .status(200)
+                    .
+
+    body(this.feedBackService.getFeedBackById(feedBackId));
+}
     @GetMapping(path = "feedBack/get-all")
-    public ResponseEntity<FeedBack> getFeedBackById(@PathVariable Integer feedBackId){
+    public ResponseEntity<List<FeedBack>> getFeedBack(){
         return ResponseEntity
                 .status(200)
-                .body(this.feedBackService.getFeedBackById(feedBackId));
+                .body(this.feedBackService.getFeedBack());
 
     }
-    @PutMapping(path = "feedBack/update-by-id/{FeedBackId}")
-    public ResponseEntity<FeedBack> updateFeedBackById(@PathVariable Integer FeedBackId ){
+    @PatchMapping(path = "feedBack/update-by-id/{FeedBackId}")
+    public ResponseEntity<FeedBack> updateFeedBackById(@PathVariable Integer FeedBackId,@RequestBody FeedBack feedBack ){
         return  ResponseEntity
                 .status(202)
-                .body(this.feedBackService.getFeedBackById(FeedBackId));
+                .body(this.feedBackService.updatedFeedBackById(feedBack, FeedBackId));
     }
     @DeleteMapping(path = "feedBack/delete_by_id/{feedBackId}")
     public ResponseEntity<String> deleteFeedBackById(@PathVariable Integer feedBackId){

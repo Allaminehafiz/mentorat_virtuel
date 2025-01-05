@@ -8,6 +8,6 @@ public interface FeedBackService {
     FeedBack addFeedBack(FeedBack feedBack);
     List<FeedBack> getFeedBack();
     FeedBack getFeedBackById(Integer feedBackId);
-    FeedBack updatedFeedBack(FeedBack feedBack, Integer feedBackId);
+    FeedBack updatedFeedBackById(FeedBack feedBack, Integer feedBackId);
     void deleteFeedBack(Integer feedBackId);
 }

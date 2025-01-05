@@ -2,8 +2,8 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.Entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Table
@@ -11,14 +11,11 @@ import java.util.List;
 public class RDV {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
-    @Temporal(TemporalType.TIME)
-    private Date debutduRDV;
-    @Temporal(TemporalType.TIME)
-    private Date duree;
+    private Instant debutduRDV;
+    private String duree;
     private String visioconference;
-    private Boolean etat;
-   // private Integer mentorId;
-    //private Integer mentoretId;
+    @Enumerated(EnumType.STRING)
+    private EtatRdv etat;
 
 //association
 @OneToOne
@@ -30,5 +27,35 @@ public class RDV {
 @OneToMany(mappedBy ="rdv" )
     private List<FeedBack> feedback =new ArrayList<>();
 
+    public Instant getDebutduRDV() {
+        return debutduRDV;
+    }
 
+    public void setDebutduRDV(Instant debutduRDV) {
+        this.debutduRDV = debutduRDV;
+    }
+
+    public String getVisioconference() {
+        return visioconference;
+    }
+
+    public void setVisioconference(String visioconference) {
+        this.visioconference = visioconference;
+    }
+
+    public EtatRdv getEtat() {
+        return etat;
+    }
+
+    public void setEtat(EtatRdv etat) {
+        this.etat = etat;
+    }
+
+    public String getDuree() {
+        return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
 }

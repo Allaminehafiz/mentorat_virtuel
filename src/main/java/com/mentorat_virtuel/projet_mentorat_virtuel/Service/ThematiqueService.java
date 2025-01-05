@@ -8,6 +8,9 @@ public interface ThematiqueService {
     Thematique addThematique(Thematique thematique);
     List<Thematique> getAllThematique();
     Thematique getThematiqueById(Integer thematiqueId);
-    Thematique updatedThematique(Thematique thematique, Integer thematiqueId);
+    Thematique updateThematiqueById(Thematique thematique, Integer thematiqueId);
+
+
+
     void deleteThematique(Integer thematiqueId);
 }

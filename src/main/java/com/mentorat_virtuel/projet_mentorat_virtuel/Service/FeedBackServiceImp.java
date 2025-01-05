@@ -2,6 +2,7 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.Service;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.Entities.FeedBack;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Repository.FeedBackRepo;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class FeedBackServiceImp implements FeedBackService {
 
     @Override
     public FeedBack addFeedBack(FeedBack feedBack) {
+feedBack.setCommentaire(new String());
 
         return this.feedBackRepo.save(feedBack);
     }
@@ -28,15 +30,17 @@ public class FeedBackServiceImp implements FeedBackService {
 
     @Override
     public FeedBack getFeedBackById(Integer feedBackId) {
-        return this.feedBackRepo.findById(feedBackId).get();
+        return this.feedBackRepo.findById(feedBackId).orElseThrow(() -> new ResourceNotFoundException("Rendez-vous with ID '" ));
     }
 
+
+
     @Override
-    public FeedBack updatedFeedBack(FeedBack feedBack, Integer feedBackId) {
+    public FeedBack updatedFeedBackById(FeedBack feedBack, Integer feedBackId) {
        FeedBack feedBackToEdit= this.feedBackRepo.findById(feedBackId).get();
         feedBackToEdit.setCommentaire(feedBack.getCommentaire());
         feedBackToEdit.setNote(feedBack.getNote());
-        feedBackToEdit.setRdv(feedBack.getRdv());
+
         return this.feedBackRepo.saveAndFlush(feedBackToEdit);
     }
 

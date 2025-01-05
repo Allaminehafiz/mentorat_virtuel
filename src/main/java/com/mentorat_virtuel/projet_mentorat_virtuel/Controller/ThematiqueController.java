@@ -2,6 +2,7 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.Controller;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.Entities.Thematique;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Service.ThematiqueService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,27 +17,33 @@ public class ThematiqueController {
     }
     @PostMapping(path = "thematique/add")
     @ResponseBody
-    public ResponseEntity<Thematique> addThematique(@RequestBody Thematique thematique){
+    public ResponseEntity<Thematique> addThematique(@Valid @RequestBody Thematique thematique){
         return ResponseEntity
                 .status(201)
                 .body(this.thematiqueService.addThematique(thematique));
     }
-    @GetMapping(path = "thematique/getallthematique")
-    public ResponseEntity<List<Thematique>> getAllThematique()
+    @GetMapping(path = "thematique/getthematique")
+    public ResponseEntity<List<Thematique>> getThematiqueById()
     {
         return ResponseEntity
                 .status(200)
                 .body(this.thematiqueService.getAllThematique());
     }
     @GetMapping(path = "thematique/getthematiquebyid/{id}")
-    public ResponseEntity<Thematique> getThematiqueById(Integer id){
+    public ResponseEntity<Thematique> getThematiqueById(@PathVariable Integer thematiqueId){
         return ResponseEntity
                 .status(200)
-                .body(this.thematiqueService.getThematiqueById(id));
+                .body(this.thematiqueService.getThematiqueById(thematiqueId));
+    }
+    @PatchMapping(path = "customer/update-by-id/{customerId}")
+    public ResponseEntity<Thematique> updateThematiqueById(@PathVariable Integer thematiqueId,@RequestBody Thematique thematique ){
+        return  ResponseEntity
+                .status(202)
+                .body(this.thematiqueService.updateThematiqueById(thematique, thematiqueId));
     }
     @DeleteMapping(path = "thematique/deletethematique/{id}")
-    public ResponseEntity<String> deleteThematique(Integer id){
-        this.thematiqueService.deleteThematique(id);
+    public ResponseEntity<String> deleteThematiqueById(@PathVariable Integer thematiqueId){
+        this.thematiqueService.deleteThematique(thematiqueId);
         return ResponseEntity
                 .status(202)
                 .body("thematique deleted successfully");

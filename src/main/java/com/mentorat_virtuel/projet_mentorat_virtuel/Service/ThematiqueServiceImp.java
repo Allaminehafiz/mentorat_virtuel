@@ -1,6 +1,7 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.Service;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.Entities.Thematique;
+import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Repository.ThematiqueRepo;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,17 @@ public class ThematiqueServiceImp implements ThematiqueService {
 
     @Override
     public Thematique getThematiqueById(Integer thematiqueId) {
-        return this.thematiqueRepo.findById(thematiqueId).get();
+        return this.thematiqueRepo.findById(thematiqueId).orElseThrow(() -> new ResourceNotFoundException("Thematique with ID '" ));
     }
 
     @Override
-    public Thematique updatedThematique(Thematique thematique, Integer thematiqueId) {
-        return null;
+    public Thematique updateThematiqueById(Thematique thematique, Integer thematiqueId) {
+        Thematique thematiqueToEdit= this.thematiqueRepo.findById(thematiqueId).get();
+        thematiqueToEdit.setLibelle(thematique.getLibelle());
+        return this.thematiqueRepo.saveAndFlush(thematiqueToEdit);
+
     }
+
 
     @Override
     public void deleteThematique(Integer thematiqueId) {
