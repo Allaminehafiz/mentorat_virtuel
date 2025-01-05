@@ -37,8 +37,12 @@ public class CommentaireServiceImpl implements CommentaireService{
     @Override
     public Commentaire updated(Commentaire commentaire, Integer commentaireId) {
         Commentaire commentaire1 = this.commentaireRepo.findById(commentaireId).get();
-        commentaire1.setContent(commentaire.getContent());
-        commentaire1.setCreatedBy(commentaire.getCreatedBy());
+        if(commentaire.getContent() != null) {
+            commentaire1.setContent(commentaire.getContent());
+        }
+        if(commentaire.getCreatedBy() != null) {
+            commentaire1.setCreatedBy(commentaire.getCreatedBy());
+        }
         commentaire1.setUpdatedAt(new Date());
 
         return this.commentaireRepo.saveAndFlush(commentaire1);

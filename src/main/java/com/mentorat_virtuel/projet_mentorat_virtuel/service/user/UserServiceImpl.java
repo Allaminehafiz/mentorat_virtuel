@@ -1,14 +1,17 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.user;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.User;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.UserRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
     private final UserRepo userRepo;
+
 
     public UserServiceImpl(UserRepo userRepo) {
 

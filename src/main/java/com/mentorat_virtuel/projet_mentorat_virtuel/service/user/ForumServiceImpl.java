@@ -2,9 +2,11 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.service.user;
 
 import com.github.slugify.Slugify;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.User;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceExisteException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.ForumRepo;
+import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.UserRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,21 +16,25 @@ import java.util.Optional;
 @Service
 public class ForumServiceImpl implements ForumService{
     private final ForumRepo forumRepo;
+    private final UserRepo userRepo;
 
-    public ForumServiceImpl(ForumRepo forumRepo) {
+    public ForumServiceImpl(ForumRepo forumRepo, UserRepo userRepo) {
         this.forumRepo = forumRepo;
+        this.userRepo = userRepo;
     }
 
     @Override
     public Forum addForum(Forum forum) {
         final Slugify slg = Slugify.builder().build();
+        User user = new User();
         Optional<Forum> forumExist = this.forumRepo.findByTitle(forum.getTitle());
-        if(forumExist.isPresent())
-            throw new ResourceExisteException("Le titre existe");
-        forum.setSlug(slg.slugify(forum.getTitle()));
-        forum.setDescription(forum.getDescription());
-        forum.setCreatedBy(forum.getCreatedBy());
-        forum.setCreatedAt(new Date());
+           if (forumExist.isPresent())
+               throw new ResourceExisteException(" Ca existe");
+               forum.setSlug(slg.slugify(forum.getTitle()));
+           forum.setDescription(forum.getDescription());
+           forum.setCreatedBy(forum.getCreatedBy());
+           forum.setCreatedAt(new Date());
+        //forum.setUser(this.userRepo.save(user));
         return this.forumRepo.save(forum);
     }
 

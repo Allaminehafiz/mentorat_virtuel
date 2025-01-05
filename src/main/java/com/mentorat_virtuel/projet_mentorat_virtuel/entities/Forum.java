@@ -2,16 +2,14 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,15 +18,16 @@ import java.util.List;
 public class Forum {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer forumId;
+    @Length(min = 2, max = 60, message = "le nom doit etre min 2 et max 60 caracters")
     @NotEmpty(message = "Remplir la case")
     private String title;
     private String slug;
     @Column(columnDefinition = "text")
     private String description;
-    @Length(min = 2, max = 60, message = "le nom doit etre min 3 et max 50 caracters")
+    @Length(min = 2, max = 60, message = "le nom doit etre min 2 et max 60 caracters")
     @NotEmpty(message = "Remplir la case")
     private String createdBy;
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private Date updatedAt;
     @Temporal(TemporalType.TIME)
     private Date createdAt;
