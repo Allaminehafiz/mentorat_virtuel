@@ -3,9 +3,10 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.service.Location;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Location;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.LocationRepo;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,14 +16,15 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRepo locationRepo;
 
-    public LocationServiceImpl(LocationRepo locationRepo) {
+
+    @Autowired
+    public LocationServiceImpl(LocationRepo locationRepo){
         this.locationRepo = locationRepo;
     }
 
-    @Override
-    public Location addLocation(Location location) {
-        //location.setCreatedAt(Instant.now());
-        //location.setStatus(true);
+    public Location addLocation(@Valid Location location) {
+        location.setCreatedAt(new Date());
+        location.setStatus(true);
         return this.locationRepo.save(location);
     }
 

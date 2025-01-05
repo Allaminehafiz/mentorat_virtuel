@@ -1,7 +1,7 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.coltroller;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.LocationReqDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Location;
-import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Mentore;
 import com.mentorat_virtuel.projet_mentorat_virtuel.service.Location.LocationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

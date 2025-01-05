@@ -1,11 +1,12 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.Mentore;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceExistException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Mentore;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.MentoreRepo;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +20,13 @@ public class MentoreServiceImpl implements MentoreService {
     }
 
     @Override
-    public Mentore addMentore(Mentore mentore) {
-       // mentore.setUpdatedAt(Instant.now());
+    public Mentore addMentore(@Valid Mentore mentore) {
+        Optional<Mentore> mentoreExist = this.mentoreRepo
+                .fetchByEmail(mentore.getEmail());
+        if(mentoreExist.isPresent())
+            throw new ResourceExistException("This email already exist !");
+
+        mentore.setCreatedAt(new Date());
         mentore.setStatus(true);
         return this.mentoreRepo.save(mentore) ;
     }

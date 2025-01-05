@@ -1,12 +1,13 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.Mentore;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Mentore;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface MentoreService {
 
-    Mentore addMentore(Mentore mentore);
+    Mentore addMentore(@Valid Mentore mentore);
     List<Mentore> getMentores();
     Mentore getMentoreById(Integer mentoreId);
     Mentore getMentoreByEmail(String email);

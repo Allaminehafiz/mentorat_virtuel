@@ -1,6 +1,7 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -21,12 +23,15 @@ public class Mentore implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mentoreId;
-    @NotNull
+    @NotEmpty(message = "the firstname does not be Empty")
+    @Column(nullable = false)
+    @Length(min = 3, max = 50, message = "firstname must have min 3 caracters and max 50 caracters")
     private String firstname;
     private String lastname;
     @NotEmpty(message = "the email does not be Empty")
+    @Email(message = "Your email address isn't correct")
     private String email;
-    @NotNull
+    @NotEmpty
     @Column(nullable = false, name = "phone_number")
     private String phone;
     @Temporal(TemporalType.TIME)
