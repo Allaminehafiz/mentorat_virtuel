@@ -30,7 +30,7 @@ public class RDVController {
                 .body(this.rdvService.getRDV());
     }
 
-    @GetMapping(path = "rdv/get-all")
+    @GetMapping(path = "rdv/get-By-Id/{rdvId}")
     public ResponseEntity<RDV> getRDVById(@PathVariable Integer rdvId){
         return ResponseEntity
                 .status(200)

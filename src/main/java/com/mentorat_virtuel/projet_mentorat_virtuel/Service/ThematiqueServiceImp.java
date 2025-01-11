@@ -26,7 +26,7 @@ public class ThematiqueServiceImp implements ThematiqueService {
 
     @Override
     public Thematique getThematiqueById(Integer thematiqueId) {
-        return this.thematiqueRepo.findById(thematiqueId).orElseThrow(() -> new ResourceNotFoundException("Thematique with ID '" ));
+        return this.thematiqueRepo.findById(thematiqueId).orElseThrow(() -> new ResourceNotFoundException("Thematique with ID not found" ));
     }
 
     @Override

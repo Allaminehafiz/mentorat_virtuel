@@ -22,26 +22,26 @@ public class ThematiqueController {
                 .status(201)
                 .body(this.thematiqueService.addThematique(thematique));
     }
-    @GetMapping(path = "thematique/getthematique")
+    @GetMapping(path = "thematique/get-thematique")
     public ResponseEntity<List<Thematique>> getThematiqueById()
     {
         return ResponseEntity
                 .status(200)
                 .body(this.thematiqueService.getAllThematique());
     }
-    @GetMapping(path = "thematique/getthematiquebyid/{id}")
+    @GetMapping(path = "thematique/get-thematique-by-id/{thematiqueId}")
     public ResponseEntity<Thematique> getThematiqueById(@PathVariable Integer thematiqueId){
         return ResponseEntity
                 .status(200)
                 .body(this.thematiqueService.getThematiqueById(thematiqueId));
     }
-    @PatchMapping(path = "customer/update-by-id/{customerId}")
+    @PatchMapping(path = "thematique/update-by-id/{thematiqueId}")
     public ResponseEntity<Thematique> updateThematiqueById(@PathVariable Integer thematiqueId,@RequestBody Thematique thematique ){
         return  ResponseEntity
                 .status(202)
                 .body(this.thematiqueService.updateThematiqueById(thematique, thematiqueId));
     }
-    @DeleteMapping(path = "thematique/deletethematique/{id}")
+    @DeleteMapping(path = "thematique/deletethematique/{thematiqueId}")
     public ResponseEntity<String> deleteThematiqueById(@PathVariable Integer thematiqueId){
         this.thematiqueService.deleteThematique(thematiqueId);
         return ResponseEntity

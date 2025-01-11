@@ -26,7 +26,7 @@ public class RDVServiceImp  implements RDVService{
 
     @Override
     public RDV getRDVById(Integer rdvId) {
-        return this.rdvRepo.findById(rdvId).orElseThrow(() -> new ResourceNotFoundException("Rendez-vous with ID '" ));
+        return this.rdvRepo.findById(rdvId).orElseThrow(() -> new ResourceNotFoundException("Rendez-vous with ID not found!" ));
     }
 
     @Override

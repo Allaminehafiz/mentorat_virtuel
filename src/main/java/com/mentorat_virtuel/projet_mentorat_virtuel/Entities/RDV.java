@@ -27,6 +27,14 @@ public class RDV {
 @OneToMany(mappedBy ="rdv" )
     private List<FeedBack> feedback =new ArrayList<>();
 
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
+    }
+
     public Instant getDebutduRDV() {
         return debutduRDV;
     }
