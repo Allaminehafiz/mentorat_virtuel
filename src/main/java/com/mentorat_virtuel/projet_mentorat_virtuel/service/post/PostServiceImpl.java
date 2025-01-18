@@ -1,7 +1,10 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.service;
+package com.mentorat_virtuel.projet_mentorat_virtuel.service.post;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.post.PostReqDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.post.PostRespDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Post;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.PostMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.PostRepo;
 import org.springframework.stereotype.Service;
 
@@ -10,21 +13,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
     private final PostRepo postRepo;
+    private final PostMapper postMapper;
 
-    public PostServiceImpl(PostRepo postRepo) {
+    public PostServiceImpl(PostRepo postRepo, PostMapper postMapper) {
         this.postRepo = postRepo;
+        this.postMapper = postMapper;
     }
 
     @Override
-    public Post addPost(Post post) {
-        return this.postRepo.save(post);
+    public PostRespDTO addPost(PostReqDTO postReqDTO) {
+        Post post = this.postMapper.fromPostReqDTO(postReqDTO);
+
+        post = this.postRepo.save(post);
+        return postMapper.fromPost(post);
     }
 
     @Override
     public List<Post> getAllPost() {
-        return this.postRepo.findAll();
+
+        return  this.postRepo.findAll();
+
     }
 
     @Override

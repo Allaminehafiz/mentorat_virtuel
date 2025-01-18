@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data
-public class CategorieDTO {
+public class CategorieReqDTO {
     @NotEmpty(message = "the field is required")
     @Length(min = 3, message = "the position name must have at least 3 characters")
     private String nom;

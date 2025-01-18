@@ -1,9 +1,11 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.categorie;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.categorie.CategorieReqDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.categorie.CategorieRespDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Categorie;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CategorieMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.CategorieRepo;
-import com.mentorat_virtuel.projet_mentorat_virtuel.service.categorie.CategorieService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,15 +15,21 @@ import java.util.Optional;
 @Service
 public class CategorieServiceImpl implements CategorieService {
     private final CategorieRepo categorieRepo;
+    private final CategorieMapper categorieMapper;
 
-    public CategorieServiceImpl(CategorieRepo categorieRepo) {
+    public CategorieServiceImpl(CategorieRepo categorieRepo, CategorieMapper categorieMapper) {
         this.categorieRepo = categorieRepo;
+        this.categorieMapper = categorieMapper;
     }
 
     @Override
-    public Categorie addCategorie(Categorie categorie) {
+    public CategorieRespDTO addCategorie(CategorieReqDTO categorieReqDTO) {
 
-        return this.categorieRepo.save(categorie);
+        Categorie categorie = this.categorieMapper.fromCategorieReqDTO(categorieReqDTO);
+
+        categorie = this.categorieRepo.save(categorie);
+
+        return categorieMapper.fromCategorie(categorie);
     }
 
     @Override
@@ -46,20 +54,6 @@ public class CategorieServiceImpl implements CategorieService {
 
     }
 
-    @Override
-    public Categorie editCategorieStatus(Integer categorieId) {
-
-        Categorie categorieToEdit = this.categorieRepo.findById(categorieId)
-                .orElseThrow(()-> new RessourceNotFoundException("category not found!"));
-
-        if(categorieToEdit.getStatus())
-            categorieToEdit.setStatus(false);
-        else
-            categorieToEdit.setStatus(true);
-        categorieToEdit.setDateModification(new Date());
-
-        return this.categorieRepo.saveAndFlush(categorieToEdit);
-    }
 
     @Override
     public Categorie updateCategorie(Categorie categorie, Integer categorieId) {

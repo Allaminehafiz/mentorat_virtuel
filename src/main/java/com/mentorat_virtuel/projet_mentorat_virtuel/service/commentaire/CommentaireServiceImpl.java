@@ -1,9 +1,11 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.commentaire;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireReqDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireRespDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Commentaire;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CommentaireMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.CommentaireRepo;
-import com.mentorat_virtuel.projet_mentorat_virtuel.service.commentaire.CommentaireService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,14 +15,18 @@ import java.util.Optional;
 @Service
 public class CommentaireServiceImpl implements CommentaireService {
     private final CommentaireRepo commentaireRepo;
+    private final CommentaireMapper commentaireMapper;
 
-    public CommentaireServiceImpl(CommentaireRepo commentaireRepo) {
+    public CommentaireServiceImpl(CommentaireRepo commentaireRepo, CommentaireMapper commentaireMapper) {
         this.commentaireRepo = commentaireRepo;
+        this.commentaireMapper = commentaireMapper;
     }
 
     @Override
-    public Commentaire addCommentaire(Commentaire commentaire) {
-        return this.commentaireRepo.save(commentaire);
+    public CommentaireRespDTO addCommentaire(CommentaireReqDTO commentaireReqDTO) {
+        Commentaire commentaire = this.commentaireMapper.fromCommentaireReqDTO(commentaireReqDTO);
+        commentaire = this.commentaireRepo.save(commentaire);
+        return commentaireMapper.fromCommentaire(commentaire);
     }
 
     @Override
