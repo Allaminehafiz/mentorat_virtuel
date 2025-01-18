@@ -43,22 +43,6 @@ public class CommentaireServiceImpl implements CommentaireService {
     }
 
     @Override
-    public Commentaire editCommentaireStatus(Integer commentaireId) {
-        //search
-        Commentaire commentaireToEdit = this.commentaireRepo.findById(commentaireId)
-                .orElseThrow(()-> new RessourceNotFoundException("comment not found"));
-        //modification
-        if (commentaireToEdit.getStatus())
-            commentaireToEdit.setStatus(false);
-        else
-            commentaireToEdit.setStatus(true);
-        commentaireToEdit.setDateModification(new Date());
-
-        //mise a jour
-        return this.commentaireRepo.saveAndFlush(commentaireToEdit);
-    }
-
-    @Override
     public Commentaire updateCommentaire(Commentaire commentaire, Integer commentaireId) {
 
         Commentaire commentaireToEdit = this.commentaireRepo.findById(commentaireId)

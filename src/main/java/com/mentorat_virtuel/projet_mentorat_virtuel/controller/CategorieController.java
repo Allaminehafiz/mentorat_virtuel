@@ -25,7 +25,7 @@ public class CategorieController {
     }
 
     @Operation(
-            summary = "Ajoute une nouvelle catégorie",
+            summary = "Ajouter une nouvelle catégorie",
             description = "Cette méthode permet d'ajouter une nouvelle catégorie dans la base de données."
     )
     @ApiResponses(value = {
@@ -48,7 +48,7 @@ public class CategorieController {
             description = "Cette méthode permet de lister toute les catégories."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "affiche toutes les categories")
+            @ApiResponse(responseCode = "200", description = "affiche toutes les categories")
     })
     @GetMapping(path = "categorie/get_all")
     public ResponseEntity<List<Categorie>> getAllCategorie(){
@@ -61,7 +61,7 @@ public class CategorieController {
             description = "Cette méthode permet d'afficher une catégorie grace a l'Id."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Affiche la categorie grace a l'Id")})
+            @ApiResponse(responseCode = "200", description = "Affiche la categorie grace a l'Id")})
     @GetMapping(path = "categorie/get_by_id/{categorieId}")
     public ResponseEntity<Categorie> getCategorieById(@Valid @PathVariable Integer categorieId){
         return ResponseEntity
@@ -71,7 +71,7 @@ public class CategorieController {
             summary = "affiche une categorie grace au nom",
             description = "Cette méthode permet d'afficher une catégorie grace au nom")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Catégorie ajoutée avec succès"),
+            @ApiResponse(responseCode = "200", description = "Affiche une categorie grace a son nom"),
             @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides")
     })
     @GetMapping(path = "categorie/get_by_nom/{nom}")
@@ -85,7 +85,7 @@ public class CategorieController {
             description = "Cette méthode permet de mettre a jour une catégorie dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "La Catégorie a ete mise a jour avec succès"),
+            @ApiResponse(responseCode = "200", description = "La Catégorie a ete mise a jour avec succès"),
             @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides")
     })
     @PutMapping(path = "categorie/update/{categorieId}")
@@ -95,11 +95,11 @@ public class CategorieController {
                 .ok(this.categorieService.updateCategorie(categorie, categorieId));
     }
     @Operation(
-            summary = "Supprimer une nouvelle catégorie",
+            summary = "Supprimer une nouvelle catégorie grace a l'ID",
             description = "Cette méthode permet de supprimer une catégorie dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Catégorie supprimee avec succès")
+            @ApiResponse(responseCode = "200", description = "Catégorie supprimee avec succès")
     })
     @DeleteMapping(path = "categorie/delete/{categorieId}")
     public ResponseEntity<String> deleteCategorieById(@PathVariable Integer categorieId){
