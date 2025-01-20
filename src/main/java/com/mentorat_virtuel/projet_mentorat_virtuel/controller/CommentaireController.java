@@ -1,8 +1,9 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireReqDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Commentaire;
-import com.mentorat_virtuel.projet_mentorat_virtuel.service.user.CommentaireService;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.mentorat_virtuel.projet_mentorat_virtuel.service.commentaire.CommentaireService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,8 @@ public class CommentaireController {
         this.commentaireService = commentaireService;
     }
     @PostMapping(path = "commentaire/add")
-    public ResponseEntity<Commentaire> add(@RequestBody Commentaire commentaire){
-        return ResponseEntity.status(200).body(this.commentaireService.add(commentaire));
+    public ResponseEntity<CommentaireResDTO> add(@RequestBody CommentaireReqDTO commentaireReqDTO){
+        return ResponseEntity.status(200).body(this.commentaireService.add(commentaireReqDTO));
     }
     @GetMapping( path = "commentaire/getALL")
     public ResponseEntity<List<Commentaire>>  getAllcom(){
