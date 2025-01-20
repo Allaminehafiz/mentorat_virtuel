@@ -10,6 +10,7 @@ import java.util.List;
 public interface PostService {
     PostRespDTO addPost(PostReqDTO postReqDTO);
     List<Post> getAllPost();
+    Page<PostRespDTO> pagination(int offset,int pageSize);
     Post getPostById(Integer postId);
     Post editPostStatus(Integer postId);
     Post updatePost(Post post,Integer postId);

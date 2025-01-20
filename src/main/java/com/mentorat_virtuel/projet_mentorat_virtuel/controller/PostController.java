@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,11 +42,17 @@ public class PostController {
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Affiche tout les Posts")})
-    @GetMapping(path = "post/get_all-post")
+    @GetMapping("/post/get-all-post/")
     public ResponseEntity<List<Post>> getAllPost(){
         return ResponseEntity
                 .ok(this.postService.getAllPost());
     }
+    @GetMapping(path = "post/pagination/{offset}/{pageSize}")
+    public ResponseEntity<Page<PostRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
+        return ResponseEntity
+                .ok(this.postService.pagination(offset, pageSize));
+    }
+
     @Operation(
             summary = "Affiche un Post grace a son ID",
             description = "Cette méthode permet d'afficher un post grace a son ID."

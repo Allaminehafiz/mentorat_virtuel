@@ -6,6 +6,9 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Post;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.PostMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.PostRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,8 +36,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllPost() {
 
-        return  this.postRepo.findAll();
+        return this.postRepo.findAll();
+    }
 
+    @Override
+    public Page<PostRespDTO> pagination(int offset, int pageSize) {
+        return this.postRepo.findAll(PageRequest.of(offset, pageSize,Sort.by(Sort.Direction.DESC,"dateCreation")))
+                .map(post -> this.postMapper.fromPost(post));
     }
 
     @Override

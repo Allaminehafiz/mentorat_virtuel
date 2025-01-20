@@ -6,6 +6,9 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Commentaire;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CommentaireMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.CommentaireRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -32,6 +35,12 @@ public class CommentaireServiceImpl implements CommentaireService {
     @Override
     public List<Commentaire> getAllCommentaire() {
         return this.commentaireRepo.findAll();
+    }
+
+    @Override
+    public Page<CommentaireRespDTO> pagination(int offset, int pageSize) {
+        return this.commentaireRepo.findAll(PageRequest.of(offset, pageSize, Sort.by(Sort.Direction.DESC,"dateCreation")))
+                .map(commentaire -> this.commentaireMapper.fromCommentaire(commentaire));
     }
 
     @Override

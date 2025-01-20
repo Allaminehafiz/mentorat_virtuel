@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,18 +68,10 @@ public class CategorieController {
         return ResponseEntity
                 .ok(this.categorieService.getCategorieById(categorieId));
     }
-    @Operation(
-            summary = "affiche une categorie grace au nom",
-            description = "Cette méthode permet d'afficher une catégorie grace au nom")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche une categorie grace a son nom"),
-            @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides")
-    })
-    @GetMapping(path = "categorie/get_by_nom/{nom}")
-    public ResponseEntity<Categorie> getCategorieByNom(@PathVariable String nom){
+    @GetMapping(path = "categorie/pagination/{offset}/{pageSize}")
+    public ResponseEntity<Page<CategorieRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity
-                .status(200)
-                .body(this.categorieService.getCategorieByNom(nom));
+                .ok(this.categorieService.pagination(offset, pageSize));
     }
     @Operation(
             summary = "Mise a jour de la catégorie",

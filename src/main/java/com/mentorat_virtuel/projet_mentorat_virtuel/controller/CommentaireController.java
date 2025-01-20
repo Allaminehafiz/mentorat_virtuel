@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,11 @@ public class CommentaireController {
     public ResponseEntity<List<Commentaire>> getAllCommentaire(){
         return ResponseEntity
                 .ok(this.commentaireService.getAllCommentaire());
+    }
+    @GetMapping(path = "commentaire/pagination/{offset}/{pageSize}")
+    public ResponseEntity<Page<CommentaireRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
+        return ResponseEntity
+                .ok(this.commentaireService.pagination(offset, pageSize));
     }
     @Operation(
             summary = "Affiche un commentaire grace a l'ID",

@@ -6,6 +6,9 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Categorie;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CategorieMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.CategorieRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -48,9 +51,17 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Categorie getCategorieByNom(String nom) {
-      return this.categorieRepo.save(this.categorieRepo.findByNom(nom)
-                .orElseThrow(()-> new RessourceNotFoundException("category doesn't exist!!")));
+    public Page<CategorieRespDTO> pagination(int offset, int pageSize) {
+        return this.categorieRepo.findAll(PageRequest.of(offset, pageSize, Sort.Direction.ASC,"dateCreation"))
+                .map(categorie -> this.categorieMapper.fromCategorie(categorie));
+    }
+
+    @Override
+    public List<Categorie> findCategorieByNomAndStatus(String nom, Boolean status) {
+        Optional<Categorie> categorie = this.categorieRepo.findCategorieByNomAndStatus(nom,status);
+        if (categorie.isEmpty())
+            throw new RessourceNotFoundException("");
+       return (List<Categorie>) categorie.get();
 
     }
 
