@@ -48,23 +48,26 @@ public class PostController {
                 .ok(this.postService.getAllPost());
     }
     @Operation(
-            summary = "Affiche une page Post ",
-            description = "Cette méthode permet d'afficher une page de post."
+            summary = "Récupérer une page de posts",
+            description = "Cette méthode permet de récupérer une page de posts avec une pagination en fonction des paramètres d'offset et de taille de page."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche une paage de post")})
+            @ApiResponse(responseCode = "200", description = "Page de posts récupérée avec succès."),
+            @ApiResponse(responseCode = "400", description = "Les paramètres de pagination sont invalides.")
+    })
     @GetMapping(path = "post/pagination/{offset}/{pageSize}")
     public ResponseEntity<Page<PostRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity
                 .ok(this.postService.pagination(offset, pageSize));
     }
-
     @Operation(
-            summary = "Affiche un Post grace a son ID",
-            description = "Cette méthode permet d'afficher un post grace a son ID."
+            summary = "Récupérer un post par son identifiant",
+            description = "Cette méthode permet de récupérer un post spécifique en utilisant son identifiant unique dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche un post grace a l'ID")})
+            @ApiResponse(responseCode = "200", description = "Le post a été récupéré avec succès."),
+            @ApiResponse(responseCode = "404", description = "Post non trouvé pour l'ID donné.")
+    })
     @GetMapping(path = "post/get_post_by_id/{postId}")
     public ResponseEntity<Post> getPostById(@PathVariable Integer postId){
         return ResponseEntity
@@ -78,12 +81,12 @@ public class PostController {
                 .body(this.postService.editPostStatus(postId));
     }
     @Operation(
-            summary = "Mise A Jour d'un Post",
-            description = "Cette méthode permet de faire la mise a jour d'un post dans la base de données."
+            summary = "Mettre à jour l'état d'un post",
+            description = "Cette méthode permet de mettre à jour l'état (par exemple, actif/inactif) d'un post existant dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Le Post a bien ete mis a jour"),
-            @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides")
+            @ApiResponse(responseCode = "202", description = "L'état du post a été mis à jour avec succès."),
+            @ApiResponse(responseCode = "404", description = "Post non trouvé pour l'ID donné.")
     })
     @PutMapping(path = "post/update_post_by_id/{postId}")
     public ResponseEntity<Post> updatePost(@Valid @RequestBody Post post,@PathVariable Integer postId){
@@ -92,11 +95,13 @@ public class PostController {
                 .body(this.postService.updatePost(post, postId));
     }
     @Operation(
-            summary = "Supprimer un Post Grace a son ID",
-            description = "Cette méthode permet de supprimer un post grace a son ID dans la base de données."
+            summary = "Supprimer un post par son identifiant",
+            description = "Cette méthode permet de supprimer un post de la base de données en utilisant son identifiant unique."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Post supprime de la base de donnees")})
+            @ApiResponse(responseCode = "200", description = "Le post a été supprimé avec succès de la base de données."),
+            @ApiResponse(responseCode = "404", description = "Post non trouvé pour l'ID donné.")
+    })
     @DeleteMapping(path = "post/delete_post_by_id/{postId}")
     public ResponseEntity<String> deletePostById(@PathVariable Integer postId){
         this.postService.deletePost(postId);

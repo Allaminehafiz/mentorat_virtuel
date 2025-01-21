@@ -45,11 +45,11 @@ public class CategorieController {
         return new ResponseEntity<>(categorieRespDTO, HttpStatus.CREATED);
     }
     @Operation(
-            summary = "Affiche toutes les categories",
-            description = "Cette méthode permet de lister toute les catégories."
+            summary = "Recuperer la liste des categories",
+            description = "Cette méthode permet de recuperer une liste complete de toutes les catégories."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "affiche toutes les categories")
+            @ApiResponse(responseCode = "200", description = "liste des categories recuperee aec success")
     })
     @GetMapping(path = "categorie/get_all")
     public ResponseEntity<List<Categorie>> getAllCategorie(){
@@ -58,34 +58,38 @@ public class CategorieController {
                 .ok(this.categorieService.getAllCategorie());
     }
     @Operation(
-            summary = "Affiche une categorie grace a Id",
-            description = "Cette méthode permet d'afficher une catégorie grace a l'Id."
+            summary = "Récupérer une catégorie par son identifiant",
+            description = "Cette méthode permet de récupérer une catégorie spécifique en utilisant son identifiant unique."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche la categorie grace a l'Id")})
+            @ApiResponse(responseCode = "200", description = "La catégorie a été récupérée avec succès."),
+            @ApiResponse(responseCode = "404", description = "Catégorie non trouvée pour l'ID donné.")
+    })
     @GetMapping(path = "categorie/get_by_id/{categorieId}")
     public ResponseEntity<Categorie> getCategorieById(@Valid @PathVariable Integer categorieId){
         return ResponseEntity
                 .ok(this.categorieService.getCategorieById(categorieId));
     }
     @Operation(
-            summary = "Affiche une page de categorie",
-            description = "Cette méthode permet d'afficher une page de  catégorie ."
+            summary = "Récupérer une page de catégories",
+            description = "Cette méthode permet de récupérer une page de catégories avec un offset et une taille de page spécifiques."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche la page de categorie ")})
+            @ApiResponse(responseCode = "200", description = "Page de catégories récupérée avec succès."),
+            @ApiResponse(responseCode = "400", description = "Paramètres de pagination invalides.")
+    })
     @GetMapping(path = "categorie/pagination/{offset}/{pageSize}")
     public ResponseEntity<Page<CategorieRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity
                 .ok(this.categorieService.pagination(offset, pageSize));
     }
     @Operation(
-            summary = "Mise a jour de la catégorie",
-            description = "Cette méthode permet de mettre a jour une catégorie dans la base de données."
+            summary = "Mettre à jour une catégorie existante",
+            description = "Cette méthode permet de mettre à jour les informations d'une catégorie existante dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "La Catégorie a ete mise a jour avec succès"),
-            @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides")
+            @ApiResponse(responseCode = "200", description = "La catégorie a été mise à jour avec succès."),
+            @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides ou incomplètes.")
     })
     @PutMapping(path = "categorie/update/{categorieId}")
     public ResponseEntity<Categorie> updateCategorie(
@@ -94,11 +98,12 @@ public class CategorieController {
                 .ok(this.categorieService.updateCategorie(categorie, categorieId));
     }
     @Operation(
-            summary = "Supprimer une nouvelle catégorie grace a l'ID",
-            description = "Cette méthode permet de supprimer une catégorie dans la base de données."
+            summary = "Supprimer une catégorie par son identifiant",
+            description = "Cette méthode permet de supprimer une catégorie de la base de données en utilisant son identifiant unique."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Catégorie supprimee avec succès")
+            @ApiResponse(responseCode = "200", description = "Catégorie supprimée avec succès."),
+            @ApiResponse(responseCode = "404", description = "Catégorie non trouvée pour l'ID donné.")
     })
     @DeleteMapping(path = "categorie/delete/{categorieId}")
     public ResponseEntity<String> deleteCategorieById(@PathVariable Integer categorieId){

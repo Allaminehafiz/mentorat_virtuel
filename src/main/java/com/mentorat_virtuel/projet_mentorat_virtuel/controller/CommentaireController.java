@@ -37,34 +37,40 @@ public class CommentaireController {
         CommentaireRespDTO commentaireRespDTO = this.commentaireService.addCommentaire(commentaireReqDTO);
         return new ResponseEntity<>(commentaireRespDTO,HttpStatus.CREATED);
     }
+
     @Operation(
-            summary = "Affiche tout les commentaire",
-            description = "Cette méthode permet d'afficher  tout les commentaire present dans la base de données."
+            summary = "Récupérer la liste de tous les commentaires",
+            description = "Cette méthode permet de récupérer tous les commentaires présents dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Liste de tout les commentaires")})
+            @ApiResponse(responseCode = "200", description = "La liste de tous les commentaires a été récupérée avec succès.")
+    })
     @GetMapping(path = "commentaire/get_all_commentaire")
     public ResponseEntity<List<Commentaire>> getAllCommentaire(){
         return ResponseEntity
                 .ok(this.commentaireService.getAllCommentaire());
     }
     @Operation(
-            summary = "Affiche une page de commentaire ",
-            description = "Cette méthode permet d'afficher une page de commentaire."
+            summary = "Récupérer une page de commentaires",
+            description = "Cette méthode permet de récupérer une page de commentaires, en fonction des paramètres d'offset et de taille de page fournis."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche une page de commentaire")})
+            @ApiResponse(responseCode = "200", description = "Page de commentaires récupérée avec succès."),
+            @ApiResponse(responseCode = "400", description = "Les paramètres de pagination sont invalides.")
+    })
     @GetMapping(path = "commentaire/pagination/{offset}/{pageSize}")
     public ResponseEntity<Page<CommentaireRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity
                 .ok(this.commentaireService.pagination(offset, pageSize));
     }
     @Operation(
-            summary = "Affiche un commentaire grace a l'ID",
-            description = "Cette méthode permet d'afficher un commentaire grace a son ID dans la base de donnee."
+            summary = "Récupérer un commentaire par son identifiant",
+            description = "Cette méthode permet de récupérer un commentaire spécifique en utilisant son identifiant unique dans la base de données."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Affiche un commentaire grace a l'ID")})
+            @ApiResponse(responseCode = "200", description = "Le commentaire a été récupéré avec succès."),
+            @ApiResponse(responseCode = "404", description = "Commentaire non trouvé pour l'ID donné.")
+    })
     @GetMapping(path = "commentaire/get_commentaire_by_id/{commentaireId}")
     public ResponseEntity<Commentaire> getCommentaireById(@PathVariable Integer commentaireId){
         return ResponseEntity
@@ -72,12 +78,12 @@ public class CommentaireController {
     }
 
     @Operation(
-            summary = "Mise A Jour d'un Commentaire",
-            description = "Cette méthode permet la mise a jour d'un commentaire dans la base de données."
+            summary = "Mettre à jour un commentaire existant",
+            description = "Cette méthode permet de mettre à jour un commentaire existant dans la base de données avec de nouvelles informations."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Mise a jour reussi"),
-            @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides")
+            @ApiResponse(responseCode = "200", description = "Le commentaire a été mis à jour avec succès."),
+            @ApiResponse(responseCode = "400", description = "Les données envoyées sont invalides ou incomplètes.")
     })
     @PutMapping(path = "commentaire/update_by_id/{commentaireId}")
     public ResponseEntity<Commentaire> updateCommentaire(@Valid @RequestBody Commentaire commentaire,@PathVariable Integer commentaireId){
@@ -85,11 +91,12 @@ public class CommentaireController {
                 .ok(this.commentaireService.updateCommentaire(commentaire, commentaireId));
     }
     @Operation(
-            summary = "Supprimer un Commentaire grace a l'ID",
-            description = "Cette méthode permet de supprimee un commentaire dans la base de données."
+            summary = "Supprimer un commentaire par son identifiant",
+            description = "Cette méthode permet de supprimer un commentaire spécifique de la base de données en utilisant son identifiant unique."
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Commentaire supprime avec success"),
+            @ApiResponse(responseCode = "200", description = "Le commentaire a été supprimé avec succès."),
+            @ApiResponse(responseCode = "404", description = "Commentaire non trouvé pour l'ID donné.")
     })
     @DeleteMapping(path = "commentaire/delete_by_id/{commentaireId}")
     public ResponseEntity<String> deleteCommentaire(@PathVariable Integer commentaireId){
