@@ -6,9 +6,10 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireR
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Commentaire;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
 
 @Mapper(componentModel = "spring")
-@Configuration
 public interface CommentaireMapper {
     Commentaire fromCommentaireReqDTO(CommentaireReqDTO commentaireReqDTO);
     CommentaireResDTO fromCommentaire(Commentaire commentaire);

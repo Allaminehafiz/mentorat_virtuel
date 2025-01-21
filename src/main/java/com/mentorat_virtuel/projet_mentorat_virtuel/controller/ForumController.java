@@ -1,8 +1,10 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumReqDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
-import com.mentorat_virtuel.projet_mentorat_virtuel.entities.User;
-import com.mentorat_virtuel.projet_mentorat_virtuel.service.user.ForumService;
+import com.mentorat_virtuel.projet_mentorat_virtuel.service.forum.ForumService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +18,8 @@ public class ForumController {
         this.forumService = forumService;
     }
     @PostMapping(path = "forum/add")
-    ResponseEntity<Forum> addForum(@RequestBody Forum forum){
-        return ResponseEntity.status(201).body(this.forumService.addForum(forum));
+    ResponseEntity<ForumResDTO> addForum(@Valid @RequestBody ForumReqDTO forumReqDTO){
+        return ResponseEntity.status(201).body(this.forumService.addForum(forumReqDTO));
     }
     @GetMapping(path = "forum/getALL")
     public ResponseEntity<List<Forum>> getAllForum(){

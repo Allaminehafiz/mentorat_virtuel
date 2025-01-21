@@ -5,16 +5,20 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireR
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Commentaire;
 import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CommentaireMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.CommentaireRepo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CommentaireServiceImpl implements CommentaireService {
     private final CommentaireRepo commentaireRepo;
     private final CommentaireMapper commentaireMapper;
 
+    @Autowired
     public CommentaireServiceImpl(CommentaireRepo commentaireRepo, CommentaireMapper commentaireMapper) {
         this.commentaireRepo = commentaireRepo;
         this.commentaireMapper = commentaireMapper;
@@ -23,8 +27,8 @@ public class CommentaireServiceImpl implements CommentaireService {
     @Override
     public CommentaireResDTO add(CommentaireReqDTO commentaireReqDTO) {
         Commentaire commentaire = this.commentaireMapper.fromCommentaireReqDTO(commentaireReqDTO);
-        commentaire = this.commentaireRepo.save(commentaire);
-        return commentaireMapper.fromCommentaire(commentaire);
+        commentaire.setCreatedAt(new Date());
+        return this.commentaireMapper.fromCommentaire(this.commentaireRepo.save(commentaire));
     }
 
     @Override
