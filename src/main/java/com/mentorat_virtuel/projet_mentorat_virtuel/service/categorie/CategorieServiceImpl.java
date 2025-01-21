@@ -57,11 +57,11 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public List<Categorie> findCategorieByNomAndStatus(String nom, Boolean status) {
-        Optional<Categorie> categorie = this.categorieRepo.findCategorieByNomAndStatus(nom,status);
+    public Categorie findCategorieByNom(String nom) {
+        Optional<Categorie> categorie = this.categorieRepo.findCategorieByNom(nom);
         if (categorie.isEmpty())
-            throw new RessourceNotFoundException("");
-       return (List<Categorie>) categorie.get();
+            throw new RessourceNotFoundException("Category not found!!");
+       return categorie.get();
 
     }
 

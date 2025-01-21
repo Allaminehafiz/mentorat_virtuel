@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface CategorieRepo extends JpaRepository<Categorie,Integer> {
 
 
-    @Query("select c from Categorie c where c.nom=:nom and c.status=:status")
-    Optional<Categorie> findCategorieByNomAndStatus(@Param("nom")String nom,@Param("status")Boolean status);
+    @Query("select c from Categorie c where c.nom=:nom")
+    Optional<Categorie> findCategorieByNom(@Param("nom")String nom);
 }

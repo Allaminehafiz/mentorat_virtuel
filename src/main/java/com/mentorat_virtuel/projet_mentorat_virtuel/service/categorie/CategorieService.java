@@ -12,7 +12,7 @@ public interface CategorieService {
     List<Categorie> getAllCategorie();
     Categorie getCategorieById(Integer categorieId);
     Page<CategorieRespDTO> pagination(int offset,int pageSize);
-    List<Categorie> findCategorieByNomAndStatus(String nom,Boolean status);
+    Categorie findCategorieByNom(String nom);
     Categorie updateCategorie(Categorie categorie,Integer categorieId);
     void deleteCategorieById(Integer categorieId);
 }

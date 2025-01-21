@@ -84,6 +84,19 @@ public class CategorieController {
                 .ok(this.categorieService.pagination(offset, pageSize));
     }
     @Operation(
+            summary = "Récupérer une catégorie par son nom",
+            description = "Cette méthode permet de récupérer une catégorie spécifique en utilisant son nom."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "La catégorie a été récupérée avec succès."),
+            @ApiResponse(responseCode = "404", description = "Catégorie non trouvée pour le nom donné.")
+    })
+    @GetMapping(path = "categorie/get-by-nom/{nom}")
+    public ResponseEntity<Categorie> getCategorieByNom(@PathVariable String nom){
+        return ResponseEntity
+                .ok(this.categorieService.findCategorieByNom(nom));
+    }
+    @Operation(
             summary = "Mettre à jour une catégorie existante",
             description = "Cette méthode permet de mettre à jour les informations d'une catégorie existante dans la base de données."
     )

@@ -74,6 +74,19 @@ public class PostController {
                 .status(200)
                 .body(this.postService.getPostById(postId));
     }
+    @Operation(
+            summary = "Récupérer un post par son nom",
+            description = "Cette méthode permet de récupérer un post spécifique en utilisant son nom dans la base de données."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Le post a été récupéré avec succès."),
+            @ApiResponse(responseCode = "404", description = "Post non trouvé pour le nom donné.")
+    })
+    @GetMapping(path = "post/get-by-nom/{nom}")
+    public ResponseEntity<Post> getPostByNom(@PathVariable String nom){
+        return ResponseEntity
+                .ok(this.postService.getPostByNom(nom));
+    }
     @PutMapping(path = "post/editStatus/{postId}")
     public ResponseEntity<Post> disablePost(Integer postId){
         return ResponseEntity

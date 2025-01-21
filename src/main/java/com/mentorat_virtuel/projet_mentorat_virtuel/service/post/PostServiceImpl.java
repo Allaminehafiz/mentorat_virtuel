@@ -46,6 +46,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post getPostByNom(String nom) {
+        Optional<Post> post = this.postRepo.findPostByNom(nom);
+        if (post.isEmpty())
+            throw new RessourceNotFoundException("Post not found!!");
+        return post.get();
+    }
+
+    @Override
     public Post getPostById(Integer postId) {
         Optional<Post> post = this.postRepo.findById(postId);
         if (post.isEmpty())
