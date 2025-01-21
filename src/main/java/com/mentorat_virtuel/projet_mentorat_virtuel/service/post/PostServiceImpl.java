@@ -1,11 +1,15 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.post;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireReqDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.post.PostReqDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.post.PostRespDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Commentaire;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Post;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
+import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CommentaireMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.PostMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.PostRepo;
+import com.mentorat_virtuel.projet_mentorat_virtuel.service.commentaire.CommentaireService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,18 +23,26 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     private final PostRepo postRepo;
     private final PostMapper postMapper;
+    private final CommentaireService commentaireService;
+    private  final CommentaireMapper commentaireMapper;
 
-    public PostServiceImpl(PostRepo postRepo, PostMapper postMapper) {
+    public PostServiceImpl(PostRepo postRepo, PostMapper postMapper, CommentaireService commentaireService, CommentaireMapper commentaireMapper) {
         this.postRepo = postRepo;
         this.postMapper = postMapper;
+        this.commentaireService = commentaireService;
+        this.commentaireMapper = commentaireMapper;
     }
 
     @Override
     public PostRespDTO addPost(PostReqDTO postReqDTO) {
         Post post = this.postMapper.fromPostReqDTO(postReqDTO);
+        post.setStatus(true);
+        post.setDateCreation(new Date());
 
-        post = this.postRepo.save(post);
-        return postMapper.fromPost(post);
+        Commentaire commentaire = this.postMapper.fromCommentaireReqDTO(postReqDTO.getCommentaireReqDTO());
+
+        post.setCommentaires(this.commentaireService.addCommentaire(commentaire));
+        return this.postMapper.fromPost(this.postRepo.save(post));
     }
 
     @Override

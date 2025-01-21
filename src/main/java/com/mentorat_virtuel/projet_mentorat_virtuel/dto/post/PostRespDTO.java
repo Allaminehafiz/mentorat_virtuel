@@ -1,5 +1,6 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.dto.post;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireRespDTO;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ public record PostRespDTO(
         @Temporal(TemporalType.TIME)
          Date dateCreation,
         @DateTimeFormat(pattern = "yyyy-mm-dd")
-         Date dateModification
+         Date dateModification,
+         CommentaireRespDTO commentaireRespDTO
 ) {
 }

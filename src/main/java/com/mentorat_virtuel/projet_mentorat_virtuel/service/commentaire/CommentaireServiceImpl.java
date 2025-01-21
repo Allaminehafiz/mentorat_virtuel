@@ -69,4 +69,9 @@ public class CommentaireServiceImpl implements CommentaireService {
                 .orElseThrow(()-> new RessourceNotFoundException("comment not found!!")));
 
     }
+
+    @Override
+    public List<Commentaire> addCommentaire(Commentaire commentaire) {
+        return this.commentaireRepo.findAll();
+    }
 }
