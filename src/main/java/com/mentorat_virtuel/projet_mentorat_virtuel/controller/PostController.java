@@ -47,6 +47,12 @@ public class PostController {
         return ResponseEntity
                 .ok(this.postService.getAllPost());
     }
+    @Operation(
+            summary = "Affiche une page Post ",
+            description = "Cette méthode permet d'afficher une page de post."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Affiche une paage de post")})
     @GetMapping(path = "post/pagination/{offset}/{pageSize}")
     public ResponseEntity<Page<PostRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity

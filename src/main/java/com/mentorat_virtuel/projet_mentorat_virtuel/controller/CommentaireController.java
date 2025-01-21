@@ -48,6 +48,12 @@ public class CommentaireController {
         return ResponseEntity
                 .ok(this.commentaireService.getAllCommentaire());
     }
+    @Operation(
+            summary = "Affiche une page de commentaire ",
+            description = "Cette méthode permet d'afficher une page de commentaire."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Affiche une page de commentaire")})
     @GetMapping(path = "commentaire/pagination/{offset}/{pageSize}")
     public ResponseEntity<Page<CommentaireRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity

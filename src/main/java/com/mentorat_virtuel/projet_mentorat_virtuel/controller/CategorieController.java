@@ -68,6 +68,12 @@ public class CategorieController {
         return ResponseEntity
                 .ok(this.categorieService.getCategorieById(categorieId));
     }
+    @Operation(
+            summary = "Affiche une page de categorie",
+            description = "Cette méthode permet d'afficher une page de  catégorie ."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Affiche la page de categorie ")})
     @GetMapping(path = "categorie/pagination/{offset}/{pageSize}")
     public ResponseEntity<Page<CategorieRespDTO>> pagination(@PathVariable int offset,@PathVariable int pageSize){
         return ResponseEntity
