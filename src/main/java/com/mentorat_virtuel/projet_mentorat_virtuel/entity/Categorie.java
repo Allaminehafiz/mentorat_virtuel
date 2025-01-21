@@ -31,11 +31,12 @@ public class Categorie implements Serializable {
     private String nom;
     private String description;
     private Boolean status;
+
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date dateCreation;
    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date dateModification;
-    @OneToMany(mappedBy = "categorie")
+    @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
     public Integer getCategorieId() {

@@ -16,4 +16,6 @@ public interface PostService {
     Post editPostStatus(Integer postId);
     Post updatePost(Post post,Integer postId);
     void deletePost(Integer postId);
+
+    List<Post> addPost(Post post);
 }

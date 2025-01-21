@@ -1,5 +1,7 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.dto.categorie;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.dto.post.PostReqDTO;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Post;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -17,4 +19,5 @@ public class CategorieReqDTO {
     private Boolean status;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date dateCreation;
+    private PostReqDTO postReqDTO;
 }

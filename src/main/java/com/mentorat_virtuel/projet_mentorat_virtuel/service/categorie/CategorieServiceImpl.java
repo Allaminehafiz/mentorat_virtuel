@@ -3,9 +3,12 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.service.categorie;
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.categorie.CategorieReqDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.categorie.CategorieRespDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Categorie;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entity.Post;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.RessourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CategorieMapper;
+import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.PostMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repository.CategorieRepo;
+import com.mentorat_virtuel.projet_mentorat_virtuel.service.post.PostService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,29 +22,34 @@ import java.util.Optional;
 public class CategorieServiceImpl implements CategorieService {
     private final CategorieRepo categorieRepo;
     private final CategorieMapper categorieMapper;
+    private final PostService postService;
+    private final PostMapper postMapper;
 
-    public CategorieServiceImpl(CategorieRepo categorieRepo, CategorieMapper categorieMapper) {
+    public CategorieServiceImpl(CategorieRepo categorieRepo, CategorieMapper categorieMapper, PostService postService, PostMapper postMapper) {
         this.categorieRepo = categorieRepo;
         this.categorieMapper = categorieMapper;
+        this.postService = postService;
+        this.postMapper = postMapper;
     }
 
     @Override
     public CategorieRespDTO addCategorie(CategorieReqDTO categorieReqDTO) {
 
         Categorie categorie = this.categorieMapper.fromCategorieReqDTO(categorieReqDTO);
+        categorie.setDateCreation(new Date());
+        categorie.setStatus(true);
 
-        categorie = this.categorieRepo.save(categorie);
+        Post post = this.categorieMapper.fromPostReqDTO(categorieReqDTO.getPostReqDTO());
 
-        return categorieMapper.fromCategorie(categorie);
+        categorie.setPosts(this.postService.addPost(post));
+
+        return this.categorieMapper.fromCategorie(this.categorieRepo.save(categorie));
     }
 
     @Override
-    public List<Categorie> getAllCategorie() {
-
-        return this.categorieRepo.findAll();}
-
-
-
+    public List<Categorie> getAllCategorie(){
+        return this.categorieRepo.findAll();
+    }
     @Override
     public Categorie getCategorieById(Integer categorieId) {
         Optional<Categorie> categorie = this.categorieRepo.findById(categorieId);
