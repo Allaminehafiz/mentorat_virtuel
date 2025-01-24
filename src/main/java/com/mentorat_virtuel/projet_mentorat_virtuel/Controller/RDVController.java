@@ -3,11 +3,10 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.Controller;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Entities.RDV;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Service.RDVService;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/rdvs")
@@ -26,10 +25,11 @@ public class RDVController {
 
     }
     @GetMapping(path = "rdv/get_all")
-    public ResponseEntity<List<RDV>> getRdv(Pageable pageable){
+    public ResponseEntity<Page<RDV>> getRdv(Page<RDV> pageable){
+        Page<RDV> rdv = this.rdvService.getRDV(pageable);
         return ResponseEntity
                 .status(200)
-                .body(this.rdvService.getRDV());
+                .body(this.rdvService.getRDV(rdv));
     }
 
     @GetMapping(path = "rdv/get-By-Id/{rdvId}")

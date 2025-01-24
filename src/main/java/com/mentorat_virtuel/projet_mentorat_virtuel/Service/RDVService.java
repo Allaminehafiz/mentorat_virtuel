@@ -1,12 +1,11 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.Service;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.Entities.RDV;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface RDVService {
     RDV addRDV(RDV rdv);
-    List<RDV> getRDV();
+    Page<RDV> getRDV(Page<RDV> pageable);
     RDV getRDVById(Integer rdvId);
 
 

@@ -3,9 +3,10 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.Service;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Entities.RDV;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.Repository.RDVRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class RDVServiceImp  implements RDVService{
    public RDVRepo rdvRepo;
@@ -20,8 +21,8 @@ public class RDVServiceImp  implements RDVService{
     }
 
     @Override
-    public List<RDV> getRDV() {
-        return this.rdvRepo.findAll();
+    public Page<RDV> getRDV(Page<RDV>  pageable) {
+        return this.rdvRepo.findAll((Pageable) pageable);
     }
 
     @Override
