@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.mapper;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.mapper;
 
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireReqDTO;
@@ -13,4 +13,4 @@ import org.springframework.stereotype.Component;
 public interface CommentaireMapper {
     Commentaire fromCommentaireReqDTO(CommentaireReqDTO commentaireReqDTO);
     CommentaireResDTO fromCommentaire(Commentaire commentaire);
-}
+}*/

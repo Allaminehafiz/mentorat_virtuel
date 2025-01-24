@@ -16,19 +16,20 @@ import java.util.List;
 @Slf4j
 public class CommentaireServiceImpl implements CommentaireService {
     private final CommentaireRepo commentaireRepo;
-    private final CommentaireMapper commentaireMapper;
 
-    @Autowired
-    public CommentaireServiceImpl(CommentaireRepo commentaireRepo, CommentaireMapper commentaireMapper) {
+
+    public CommentaireServiceImpl(CommentaireRepo commentaireRepo) {
         this.commentaireRepo = commentaireRepo;
-        this.commentaireMapper = commentaireMapper;
     }
 
     @Override
-    public CommentaireResDTO add(CommentaireReqDTO commentaireReqDTO) {
-        Commentaire commentaire = this.commentaireMapper.fromCommentaireReqDTO(commentaireReqDTO);
+    public Commentaire add(Commentaire commentaire) {
+        commentaire.setContent(commentaire.getContent());
+        commentaire.setCreatedBy(commentaire.getCreatedBy());
         commentaire.setCreatedAt(new Date());
-        return this.commentaireMapper.fromCommentaire(this.commentaireRepo.save(commentaire));
+        //Commentaire commentaire = this.commentaireMapper.fromCommentaireReqDTO(commentaireReqDTO);
+        commentaire.setCreatedAt(new Date());
+        return this.commentaireRepo.save(commentaire);
     }
 
     @Override

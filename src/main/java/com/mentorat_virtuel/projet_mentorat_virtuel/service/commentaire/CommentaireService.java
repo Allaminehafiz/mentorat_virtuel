@@ -7,7 +7,7 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Commentaire;
 import java.util.List;
 
 public interface CommentaireService {
-    CommentaireResDTO add(CommentaireReqDTO commentaireReqDTO);
+    Commentaire add(Commentaire commentaire);
     List<Commentaire> getAllcom();
     Commentaire getById(Integer commentaireId);
     Commentaire updated(Commentaire commentaire, Integer commentaireId);

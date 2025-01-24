@@ -18,8 +18,8 @@ public class CommentaireController {
         this.commentaireService = commentaireService;
     }
     @PostMapping(path = "commentaire/add")
-    public ResponseEntity<CommentaireResDTO> add(@Valid @RequestBody CommentaireReqDTO commentaireReqDTO){
-        return ResponseEntity.status(200).body(this.commentaireService.add(commentaireReqDTO));
+    public ResponseEntity<Commentaire> add(@Valid @RequestBody Commentaire commentaire){
+        return ResponseEntity.status(200).body(this.commentaireService.add(commentaire));
     }
     @GetMapping( path = "commentaire/getALL")
     public ResponseEntity<List<Commentaire>>  getAllcom(){
