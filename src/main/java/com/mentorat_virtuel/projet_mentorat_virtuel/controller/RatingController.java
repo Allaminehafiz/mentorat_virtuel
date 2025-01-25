@@ -25,12 +25,12 @@ public class RatingController {
     }
 
     @GetMapping("/product/{productId}")
-    public ResponseEntity<List<Rating>> getRatingsByProduct(@PathVariable Long productId) {
-        return ResponseEntity.ok(ratingService.getRatingsByProduct(productId));
+    public ResponseEntity<List<Rating>> getRatingsByProduct(@PathVariable Integer commentaireId) {
+        return ResponseEntity.ok(ratingService.getRatingsByCommentaire(commentaireId));
     }
 
     @GetMapping("/product/{productId}/average")
-    public ResponseEntity<Double> getAverageRating(@PathVariable Long productId) {
-        return ResponseEntity.ok(ratingService.getAverageRating(productId));
+    public ResponseEntity<Double> getAverageRating(@PathVariable Integer commentaireId) {
+        return ResponseEntity.ok(ratingService.getAverageRating(commentaireId));
     }
 }

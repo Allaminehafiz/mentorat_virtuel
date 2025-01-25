@@ -19,12 +19,12 @@ public class RatingService {
         return ratingRepository.save(rating);
     }
 
-    public List<Rating> getRatingsByProduct(Long productId) {
-        return ratingRepository.findByProductId(productId);
+    public List<Rating> getRatingsByCommentaire(Integer commentaireId) {
+        return ratingRepository.findByCommentaireId(commentaireId);
     }
 
-    public double getAverageRating(Long productId) {
-        List<Rating> ratings = ratingRepository.findByProductId(productId);
+    public double getAverageRating(Integer commentaireId) {
+        List<Rating> ratings = ratingRepository.findByCommentaireId(commentaireId);
         return ratings.stream()
                 .mapToInt(Rating::getScore)
                 .average()
