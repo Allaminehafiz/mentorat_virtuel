@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Rating;
@@ -33,4 +33,4 @@ public class RatingController {
     public ResponseEntity<Double> getAverageRating(@PathVariable Integer commentaireId) {
         return ResponseEntity.ok(ratingService.getAverageRating(commentaireId));
     }
-}
+}*/

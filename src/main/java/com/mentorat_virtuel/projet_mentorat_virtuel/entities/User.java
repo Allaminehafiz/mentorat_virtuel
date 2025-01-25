@@ -38,6 +38,10 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date createdAt;
 
+    @OneToMany(mappedBy = "user")
+    private List<Forum> forum = new ArrayList<>();
+
+
     public Integer getUserId() {
         return userId;
     }
@@ -93,8 +97,5 @@ public class User implements Serializable {
     public void setForum(List<Forum> forum) {
         this.forum = forum;
     }
-
-    @OneToMany(mappedBy = "user")
-    private List<Forum> forum = new ArrayList<>();
 
 }

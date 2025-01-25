@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.service.fonctionnaliteavance;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.service.fonctionnaliteavance;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Rating;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.RatingRepository;
@@ -30,4 +30,4 @@ public class RatingService {
                 .average()
                 .orElse(0.0);
     }
-}
+}*/

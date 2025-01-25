@@ -11,4 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ForumRepo extends JpaRepository<Forum, Integer> {
     Optional<Forum> findByTitle(String title);
+
+    @Query("select f from Forum f where f.description like %:description")
+    Optional<Forum> fetchByDescription(@Param("description") String description);
 }

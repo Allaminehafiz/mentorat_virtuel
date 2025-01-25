@@ -33,8 +33,13 @@ public class Commentaire implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date createdAt;
 
+
+
     @ManyToMany
     private List<Sujet> sujet = new ArrayList<>();
+/*
+    @OneToMany(mappedBy = "commentaire", cascade = CascadeType.ALL)
+    private List<Rating> ratings;*/  // Liste des notations associées
 
     public Integer getCommentaireId() {
         return commentaireId;
@@ -76,4 +81,11 @@ public class Commentaire implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public List<Sujet> getSujet() {
+        return sujet;
+    }
+
+    public void setSujet(List<Sujet> sujet) {
+        this.sujet = sujet;
+    }
 }

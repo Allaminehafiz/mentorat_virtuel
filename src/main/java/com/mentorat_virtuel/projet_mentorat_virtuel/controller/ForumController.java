@@ -34,6 +34,15 @@ public class ForumController {
     public ResponseEntity<List<Forum>> getAllForum(){
        return ResponseEntity.status(200).body(this.forumService.getAllForum());
     }
+
+    @GetMapping(path = "forum/get_by_description{description}")
+    public ResponseEntity<Forum> getCustomerByTitle(@PathVariable String description){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.forumService.getForumByDescription(description));
+    }
+
     @GetMapping(path = "forum/getbyId{forumId}")
     public ResponseEntity<Forum> getbyId(@PathVariable Integer forumId){
         return ResponseEntity.status(200).body(this.forumService.getById(forumId));

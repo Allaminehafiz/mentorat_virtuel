@@ -52,6 +52,15 @@ public class ForumServiceImpl implements ForumService {
     }
 
     @Override
+    public Forum getForumByDescription(String description) {
+        System.out.println("Recherche du forum avec le description : " + description);
+        return this.forumRepo.fetchByDescription(description)
+                .orElseThrow(() -> new ResourceNotFoundException("Description not found: " + description));
+    }
+
+
+
+    @Override
     public Forum getById(Integer forumId) {
         return this.forumRepo.findById(forumId).get();
     }
