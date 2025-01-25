@@ -13,11 +13,11 @@ import java.util.List;
 
 @Repository
 public interface RDVRepo extends JpaRepository<RDV, Integer> {
-    @Query("SELECT r FROM Rdv r WHERE r.debutDuRDV BETWEEN :startDate AND :endDate")
-    List<RDV> findBetweenDates(@Param("startDate") Instant startDate, @Param("endDate") Instant endDate);
-    @Query("SELECT r FROM Rdv r WHERE r.mentor = :mentor")
-    List<RDV> findByMentor(@Param("mentor") Mentor mentor);
-    @Query("SELECT COUNT(r) FROM Rdv r WHERE r.etat = 'COMPLETED'")
-    Long countCompletedRdvs();
+  // @Query("SELECT r FROM Rdv r WHERE r.debutDuRDV BETWEEN :startDate AND :endDate")
+   // List<RDV> findBetweenDates(@Param("startDate") Instant startDate, @Param("endDate") Instant endDate);
+  //  @Query("SELECT r FROM Rdv r WHERE r.mentor = :mentor")
+    //List<RDV> findByMentor(@Param("mentor") Mentor mentor);
+   // @Query("SELECT COUNT(r) FROM Rdv r WHERE r.etat = 'COMPLETED'")
+    //Long countCompletedRdvs();
 }
 

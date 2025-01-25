@@ -9,7 +9,8 @@ import java.util.List;
 @Table
 @Entity
 public class RDV {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
     private Instant debutduRDV;
     private String duree;
@@ -17,15 +18,15 @@ public class RDV {
     @Enumerated(EnumType.STRING)
     private EtatRdv etat;
 
-//association
-@OneToOne
+    //association
+    @OneToOne
     private Thematique thematique;
-@OneToOne
+    @OneToOne
     private Mentoret mentoret;
-@OneToOne
+    @OneToOne
     private Mentor mentor;
-@OneToMany(mappedBy ="rdv" )
-    private List<FeedBack> feedback =new ArrayList<>();
+    @OneToMany(mappedBy = "rdv")
+    private List<FeedBack> feedback = new ArrayList<>();
 
     public Integer getId() {
         return Id;
@@ -66,4 +67,10 @@ public class RDV {
     public void setDuree(String duree) {
         this.duree = duree;
     }
+
+    public Object getMentor() {
+        return mentor;
+
+    }
 }
+
