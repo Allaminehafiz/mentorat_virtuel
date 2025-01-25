@@ -1,10 +1,9 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
-
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireReqDTO;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Commentaire;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.service.commentaire.CommentaireService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +20,16 @@ public class CommentaireController {
     public ResponseEntity<Commentaire> add(@Valid @RequestBody Commentaire commentaire){
         return ResponseEntity.status(200).body(this.commentaireService.add(commentaire));
     }
+
+    @GetMapping(path = "commentaire/get_all/{offset}/{pageSize}")
+    public ResponseEntity<Page<Commentaire>> getAllComment(@PathVariable int offset, @PathVariable int pageSize){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.commentaireService.getComment(offset,pageSize));
+    }
+
+
     @GetMapping( path = "commentaire/getALL")
     public ResponseEntity<List<Commentaire>>  getAllcom(){
         return ResponseEntity.status(201).body(this.commentaireService.getAllcom());

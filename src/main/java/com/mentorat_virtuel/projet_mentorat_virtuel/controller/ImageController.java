@@ -2,7 +2,7 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.ImageEntity;
-import com.mentorat_virtuel.projet_mentorat_virtuel.service.image.ImageServiceImpl;
+import com.mentorat_virtuel.projet_mentorat_virtuel.service.fonctionnaliteavance.ImageServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

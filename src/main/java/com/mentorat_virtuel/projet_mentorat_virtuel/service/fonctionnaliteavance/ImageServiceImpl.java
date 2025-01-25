@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.service.image;
+package com.mentorat_virtuel.projet_mentorat_virtuel.service.fonctionnaliteavance;
 
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.ImageEntity;

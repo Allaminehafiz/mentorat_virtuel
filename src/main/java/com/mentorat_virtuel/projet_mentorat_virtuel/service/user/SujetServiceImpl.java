@@ -6,6 +6,9 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceExisteException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.SujetRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -31,6 +34,12 @@ public class SujetServiceImpl implements SujetService{
         sujet.setCreatedAt(new Date());
         sujet.setCreatedBy(sujet.getCreatedBy());
         return this.sujetRepo.save(sujet);
+    }
+
+    @Override
+    public Page<Sujet> getSujet(int offset, int pageSize) {
+        return this.sujetRepo.findAll(PageRequest.of(offset, pageSize, Sort.by(Sort.Direction.DESC, "createdAt")))
+                .map(this.sujetRepo::save);
     }
 
     @Override

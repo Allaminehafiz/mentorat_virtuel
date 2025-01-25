@@ -1,12 +1,13 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.commentaire;
 
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireReqDTO;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire.CommentaireResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Commentaire;
-import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.CommentaireMapper;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.CommentaireRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -30,6 +31,12 @@ public class CommentaireServiceImpl implements CommentaireService {
         //Commentaire commentaire = this.commentaireMapper.fromCommentaireReqDTO(commentaireReqDTO);
         commentaire.setCreatedAt(new Date());
         return this.commentaireRepo.save(commentaire);
+    }
+
+    @Override
+    public Page<Commentaire> getComment(int offset, int pageSize) {
+        return this.commentaireRepo.findAll(PageRequest.of(offset, pageSize, Sort.by(Sort.Direction.DESC, "createdAt")))
+                .map(this.commentaireRepo::save);
     }
 
     @Override

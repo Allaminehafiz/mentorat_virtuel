@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
@@ -46,4 +46,4 @@ public class ForumReqDTO {
     public void setCreatedBy(@Length(min = 2, max = 60, message = "le nom doit etre min 2 et max 60 caracters") @NotEmpty(message = "Remplir la case") String createdBy) {
         this.createdBy = createdBy;
     }
-}
+}*/

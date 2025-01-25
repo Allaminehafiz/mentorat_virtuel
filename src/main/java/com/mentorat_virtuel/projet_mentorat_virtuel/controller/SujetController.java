@@ -2,6 +2,7 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.service.user.SujetService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,15 @@ public class SujetController {
     public ResponseEntity<Sujet> add(@RequestBody Sujet sujet){
         return ResponseEntity.status(201).body(this.sujetService.add(sujet));
     }
+
+    @GetMapping(path = "sujet/get_all/{offset}/{pageSize}")
+    public ResponseEntity<Page<Sujet>> getAllCustomer(@PathVariable int offset, @PathVariable int pageSize){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.sujetService.getSujet(offset,pageSize));
+    }
+
 
     @GetMapping(path = "sujet/getAll")
     public ResponseEntity<List<Sujet>> getAll(){

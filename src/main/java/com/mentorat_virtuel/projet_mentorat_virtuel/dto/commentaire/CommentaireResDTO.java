@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.dto.commentaire;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
@@ -58,4 +58,4 @@ public class CommentaireResDTO {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-}
+}*/

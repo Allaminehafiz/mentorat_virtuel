@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.mapper;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.mapper;
 
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumReqDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumResDTO;
@@ -11,4 +11,4 @@ import org.springframework.context.annotation.Configuration;
 public interface ForumMapper {
     Forum fromForumReqDTO(ForumReqDTO forumReqDTO);
     ForumResDTO fromForum(Forum forum);
-}
+}*/

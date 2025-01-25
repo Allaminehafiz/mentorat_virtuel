@@ -1,12 +1,13 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.forum;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumReqDTO;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface ForumService {
-    ForumResDTO addForum(ForumReqDTO forumReqDTO);
+    Forum addForum(Forum forum);
+    Page<Forum> getForum(int offset, int pageSize);
     List<Forum> getAllForum();
     Forum getById(Integer forumId);
     Forum updated(Forum forum, Integer forumId);

@@ -1,10 +1,10 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumReqDTO;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.service.forum.ForumService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +18,18 @@ public class ForumController {
         this.forumService = forumService;
     }
     @PostMapping(path = "forum/add")
-    ResponseEntity<ForumResDTO> addForum(@Valid @RequestBody ForumReqDTO forumReqDTO){
-        return ResponseEntity.status(201).body(this.forumService.addForum(forumReqDTO));
+    ResponseEntity<Forum> addForum(@Valid @RequestBody Forum forum){
+        return ResponseEntity.status(201).body(this.forumService.addForum(forum));
     }
+
+    @GetMapping(path = "forum/get_all/{offset}/{pageSize}")
+    public ResponseEntity<Page<Forum>> getAllCustomer(@PathVariable int offset, @PathVariable int pageSize){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.forumService.getForum(offset,pageSize));
+    }
+
     @GetMapping(path = "forum/getALL")
     public ResponseEntity<List<Forum>> getAllForum(){
        return ResponseEntity.status(200).body(this.forumService.getAllForum());

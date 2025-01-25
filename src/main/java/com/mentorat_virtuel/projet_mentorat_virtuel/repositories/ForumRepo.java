@@ -10,6 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ForumRepo extends JpaRepository<Forum, Integer> {
-    @Query("select c from Customer c where c.email = :email")
-    Optional<Forum> findByTitle(@Param("email") String title);
+    Optional<Forum> findByTitle(String title);
 }

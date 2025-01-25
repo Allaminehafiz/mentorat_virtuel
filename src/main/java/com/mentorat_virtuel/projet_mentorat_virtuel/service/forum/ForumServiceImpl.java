@@ -1,15 +1,14 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.service.forum;
 
 import com.github.slugify.Slugify;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumReqDTO;
-import com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum.ForumResDTO;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
-import com.mentorat_virtuel.projet_mentorat_virtuel.entities.User;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceExisteException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceNotFoundException;
-import com.mentorat_virtuel.projet_mentorat_virtuel.mapper.ForumMapper;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.ForumRepo;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.UserRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -19,25 +18,32 @@ import java.util.Optional;
 @Service
 public class ForumServiceImpl implements ForumService {
     private final ForumRepo forumRepo;
-    private final ForumMapper forumMapper;
     private final UserRepo userRepo;
 
-    public ForumServiceImpl(ForumRepo forumRepo, ForumMapper forumMapper, UserRepo userRepo) {
+    public ForumServiceImpl(ForumRepo forumRepo, UserRepo userRepo) {
         this.forumRepo = forumRepo;
-        this.forumMapper = forumMapper;
         this.userRepo = userRepo;
     }
 
     @Override
-    public ForumResDTO addForum(ForumReqDTO forumReqDTO) {
+    public Forum addForum(Forum forum) {
         final Slugify slg = Slugify.builder().build();
-        Optional<Forum> forumExist = this.forumRepo.findByTitle(forumReqDTO.getTitle());
+        Optional<Forum> forumExist = this.forumRepo.findByTitle(forum.getTitle());
            if (forumExist.isPresent())
                throw new ResourceExisteException(" Ca existe");
-        Forum forum = this.forumMapper.fromForumReqDTO(forumReqDTO);
+           forum.setSlug(slg.slugify(forum.getTitle()));
+           forum.setTitle(forum.getTitle());
+           forum.setDescription(forum.getDescription());
+           forum.setCreatedBy(forum.getCreatedBy());
            forum.setCreatedAt(new Date());
         //forum.setUser(this.userRepo.save(user));
-        return this.forumMapper.fromForum(this.forumRepo.save(forum));
+        return this.forumRepo.save(forum);
+    }
+
+    @Override
+    public Page<Forum> getForum(int offset, int pageSize) {
+        return this.forumRepo.findAll(PageRequest.of(offset, pageSize, Sort.by(Sort.Direction.DESC, "createdAt")))
+                .map(this.forumRepo::save);
     }
 
     @Override

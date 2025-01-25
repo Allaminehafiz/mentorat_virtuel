@@ -1,4 +1,4 @@
-package com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum;
+/*package com.mentorat_virtuel.projet_mentorat_virtuel.dto.forum;
 
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -18,4 +18,4 @@ public class ForumResDTO {
     private String slug;
     private Date updatedAt;
     private Date createdAt;
-}
+}*/
