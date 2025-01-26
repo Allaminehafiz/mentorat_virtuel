@@ -1,19 +1,27 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Table
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class RDV {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
-    private Instant debutduRDV;
-    private String duree;
+    private Date debutduRDV;
+    private Date duree;
     private String visioconference;
     @Enumerated(EnumType.STRING)
     private EtatRdv etat;
@@ -28,20 +36,20 @@ public class RDV {
     @OneToMany(mappedBy = "rdv")
     private List<FeedBack> feedback = new ArrayList<>();
 
-    public Integer getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
-    }
-
-    public Instant getDebutduRDV() {
+    public Date getDebutduRDV() {
         return debutduRDV;
     }
 
-    public void setDebutduRDV(Instant debutduRDV) {
+    public void setDebutduRDV(Date debutduRDV) {
         this.debutduRDV = debutduRDV;
+    }
+
+    public Date getDuree() {
+        return duree;
+    }
+
+    public void setDuree(Date duree) {
+        this.duree = duree;
     }
 
     public String getVisioconference() {
@@ -60,17 +68,5 @@ public class RDV {
         this.etat = etat;
     }
 
-    public String getDuree() {
-        return duree;
-    }
-
-    public void setDuree(String duree) {
-        this.duree = duree;
-    }
-
-    public Object getMentor() {
-        return mentor;
-
-    }
 }
 

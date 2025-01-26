@@ -5,12 +5,11 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Data;
 
-import java.time.Instant;
-
+import java.util.Date;
 @Data
-public class RDVReqDTO {
-    private Instant debutduRDV;
-    private String duree;
+public class RdvReqDTO {
+    private Date debutduRDV;
+    private Date duree;
     private String visioconference;
     @Enumerated(EnumType.STRING)
     private EtatRdv etat;
