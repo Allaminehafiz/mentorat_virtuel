@@ -43,6 +43,14 @@ public class SujetServiceImpl implements SujetService{
     }
 
     @Override
+    public List<Sujet> findByOrderByAsc() {
+        List<Sujet> sujets = sujetRepo.findByOrderByTitleAsc();
+        if (sujets.isEmpty())
+            throw new RuntimeException("Pas de sujet a trier");
+        return sujets;
+    }
+
+    @Override
     public List<Sujet> getAllSujet() {
 
         return this.sujetRepo.findAll();

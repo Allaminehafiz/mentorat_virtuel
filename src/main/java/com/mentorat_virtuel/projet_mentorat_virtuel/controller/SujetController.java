@@ -1,5 +1,6 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.controller;
 
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.service.user.SujetService;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,14 @@ public class SujetController {
     @PostMapping(path = "sujet/add")
     public ResponseEntity<Sujet> add(@RequestBody Sujet sujet){
         return ResponseEntity.status(201).body(this.sujetService.add(sujet));
+    }
+
+    @GetMapping(path = "sujet/get_by_orderAsc")
+    public ResponseEntity<List<Sujet>> getSujetOrderByTitleAsc(){
+
+        return ResponseEntity
+                .status(200)
+                .body(this.sujetService.findByOrderByAsc());
     }
 
     @GetMapping(path = "sujet/get_all/{offset}/{pageSize}")

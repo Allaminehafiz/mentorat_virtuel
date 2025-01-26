@@ -10,6 +10,7 @@ import java.util.List;
 public interface SujetService {
     Sujet add(Sujet sujet);
     Page<Sujet> getSujet(int offset, int pageSize);
+    List<Sujet> findByOrderByAsc();
     List<Sujet> getAllSujet();
     Sujet getById(Integer sujetId);
     Sujet updated(Sujet sujet, Integer sujetId);
