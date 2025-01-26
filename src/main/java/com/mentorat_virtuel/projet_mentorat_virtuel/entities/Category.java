@@ -6,52 +6,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "categories")
 
-public class Category {
+public class Category implements Serializable {
+    @Serial
+    private static final long serialVersionUID=1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idCategory;
+    private Integer idCategory;
     private Date updateAt;
     private Boolean etat;
 
-    public Category() {
-    }
 
-    public Category(Date updateAt, String idCategory, Boolean etat) {
-        this.updateAt = updateAt;
-        this.idCategory = idCategory;
-        this.etat = etat;
-    }
 
-    public String getIdCategory() {
-        return idCategory;
-    }
 
-    public void setIdCategory(String idCategory) {
-        this.idCategory = idCategory;
-    }
-
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public Boolean getEtat() {
-        return etat;
-    }
-
-    public void setEtat(Boolean etat) {
-        this.etat = etat;
-    }
 
     /*@ManyToOne
     private Ressource ressource;*/
