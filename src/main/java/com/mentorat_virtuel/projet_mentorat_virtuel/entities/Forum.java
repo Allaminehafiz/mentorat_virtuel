@@ -36,7 +36,10 @@ public class Forum {
     private User user;
 
     @ManyToMany
-    private List<Sujet> sujet = new ArrayList<>();
+    @JoinTable(name = "sujet_forum",
+    joinColumns = @JoinColumn(name = "forumId"),
+    inverseJoinColumns = @JoinColumn(name = "sujetId"))
+    private List<Sujet> sujetForum = new ArrayList<>();
 
 
     public Integer getForumId() {
@@ -103,11 +106,11 @@ public class Forum {
         this.user = user;
     }
 
-    public List<Sujet> getSujet() {
-        return sujet;
+    public List<Sujet> getSujetForum() {
+        return sujetForum;
     }
 
-    public void setSujet(List<Sujet> sujet) {
-        this.sujet = sujet;
+    public void setSujetForum(List<Sujet> sujetForum) {
+        this.sujetForum = sujetForum;
     }
 }

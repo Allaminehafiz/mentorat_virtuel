@@ -13,5 +13,5 @@ public interface ForumService {
     Forum getById(Integer forumId);
     Forum updated(Forum forum, Integer forumId);
     void delete(Integer forumId);
-
+    Forum liaison(Integer forumId, Integer sujetId);
 }

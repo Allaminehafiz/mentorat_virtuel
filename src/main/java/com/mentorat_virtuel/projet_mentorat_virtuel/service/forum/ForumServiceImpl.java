@@ -2,9 +2,11 @@ package com.mentorat_virtuel.projet_mentorat_virtuel.service.forum;
 
 import com.github.slugify.Slugify;
 import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Forum;
+import com.mentorat_virtuel.projet_mentorat_virtuel.entities.Sujet;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceExisteException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.exception.ResourceNotFoundException;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.ForumRepo;
+import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.SujetRepo;
 import com.mentorat_virtuel.projet_mentorat_virtuel.repositories.UserRepo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +20,12 @@ import java.util.Optional;
 @Service
 public class ForumServiceImpl implements ForumService {
     private final ForumRepo forumRepo;
+    private final SujetRepo sujetRepo;
     private final UserRepo userRepo;
 
-    public ForumServiceImpl(ForumRepo forumRepo, UserRepo userRepo) {
+    public ForumServiceImpl(ForumRepo forumRepo, SujetRepo sujetRepo, UserRepo userRepo) {
         this.forumRepo = forumRepo;
+        this.sujetRepo = sujetRepo;
         this.userRepo = userRepo;
     }
 
@@ -84,5 +88,16 @@ public class ForumServiceImpl implements ForumService {
     public void delete(Integer forumId) {
         this.forumRepo.deleteById(forumId);
 
+    }
+
+    @Override
+    public Forum liaison(Integer forumId, Integer sujetId) {
+        List<Sujet> sujetList = null;
+        Forum forum = forumRepo.findById(forumId).get();
+        Sujet sujet = sujetRepo.findById(sujetId).get();
+        sujetList = forum.getSujetForum();
+        sujetList.add(sujet);
+        forum.setSujetForum(sujetList);
+         return forumRepo.save(forum);
     }
 }

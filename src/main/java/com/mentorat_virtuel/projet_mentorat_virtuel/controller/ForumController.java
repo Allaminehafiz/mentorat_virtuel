@@ -57,5 +57,10 @@ public class ForumController {
         return ResponseEntity.status(202).body("Delete successfully");
     }
 
+    @PutMapping("/{forumId}/forum/{sujetId}")
+    public Forum liaison(@PathVariable Integer forumId, @PathVariable Integer sujetId){
+        return forumService.liaison(forumId, sujetId);
+    }
+
 
 }

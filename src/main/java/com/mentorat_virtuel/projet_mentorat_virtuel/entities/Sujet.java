@@ -1,5 +1,6 @@
 package com.mentorat_virtuel.projet_mentorat_virtuel.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -37,7 +38,8 @@ public class Sujet implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date createdAt;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(mappedBy = "sujetForum")
     private List<Forum> forum = new ArrayList<>();
 
     @ManyToMany
