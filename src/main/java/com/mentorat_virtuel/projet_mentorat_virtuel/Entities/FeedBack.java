@@ -13,27 +13,9 @@ public class FeedBack {
     @Column(nullable = false)
     @NotEmpty(message = "this field must not be left empty")
     private String commentaire;
-
     //association
     @ManyToOne
     private RDV rdv;
-
-    public Integer getFeedbackId() {
-        return feedbackId;
-    }
-
-    public void setFeedbackId(Integer feedbackId) {
-        this.feedbackId = feedbackId;
-    }
-
-
-    public String getCommentaire() {
-        return commentaire;
-    }
-
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
-    }
 
     public Integer getNote() {
         return note;
@@ -43,5 +25,28 @@ public class FeedBack {
         this.note = note;
     }
 
+    public Integer getFeedbackId() {
+        return feedbackId;
+    }
+
+    public void setFeedbackId(Integer feedbackId) {
+        this.feedbackId = feedbackId;
+    }
+
+    public  String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire (String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public RDV getRdv() {
+        return rdv;
+    }
+
+    public void setRdv(RDV rdv) {
+        this.rdv = rdv;
+    }
 
 }

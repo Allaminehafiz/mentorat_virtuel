@@ -13,4 +13,36 @@ public class RdvReqDTO {
     private String visioconference;
     @Enumerated(EnumType.STRING)
     private EtatRdv etat;
+
+    public Date getDebutduRDV() {
+        return debutduRDV;
+    }
+
+    public void setDebutduRDV(Date debutduRDV) {
+        this.debutduRDV = debutduRDV;
+    }
+
+    public String getVisioconference() {
+        return visioconference;
+    }
+
+    public void setVisioconference(String visioconference) {
+        this.visioconference = visioconference;
+    }
+
+    public Date getDuree() {
+        return duree;
+    }
+
+    public void setDuree(Date duree) {
+        this.duree = duree;
+    }
+
+    public EtatRdv getEtat() {
+        return etat;
+    }
+
+    public void setEtat(EtatRdv etat) {
+        this.etat = etat;
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class FeedBackController {
@@ -18,11 +19,8 @@ public class FeedBackController {
 
     @PostMapping("feedBack/add")
     public ResponseEntity<FeedBack> addFeedBack(@Valid @RequestBody FeedBack feedBack) {
-        FeedBack feedBack1 = this.feedBackService.addFeedBack(feedBack);
-        return ResponseEntity
-                .status(201)
-                .body(feedBack1);
-
+       return ResponseEntity
+               .ok(this.feedBackService.addFeedBack(feedBack));
     }
 
     @GetMapping(path = "feedBackById/get_By_Id/{id}")
@@ -32,6 +30,11 @@ public class FeedBackController {
                     .
 
     body(this.feedBackService.getFeedBackById(feedBackId));
+}
+@GetMapping(path = "feedback/get-feedback-commentaire/{commentaire}")
+public ResponseEntity<FeedBack> getFeedBackByCommentaire(@PathVariable String commentaire){
+        return ResponseEntity
+                .ok(this.feedBackService.findFeedBackByCommentaire(commentaire));
 }
     @GetMapping(path = "feedBack/get-all")
     public ResponseEntity<List<FeedBack>> getFeedBack(){

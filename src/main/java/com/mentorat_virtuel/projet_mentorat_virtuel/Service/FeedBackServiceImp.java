@@ -7,6 +7,8 @@ import com.mentorat_virtuel.projet_mentorat_virtuel.Repository.FeedBackRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class FeedBackServiceImp implements FeedBackService {
     public final FeedBackRepo feedBackRepo;
@@ -18,14 +20,20 @@ public class FeedBackServiceImp implements FeedBackService {
 
     @Override
     public FeedBack addFeedBack(FeedBack feedBack) {
-feedBack.setCommentaire(new String());
-
         return this.feedBackRepo.save(feedBack);
     }
 
     @Override
     public List<FeedBack> getFeedBack() {
         return this.feedBackRepo.findAll();
+    }
+
+    @Override
+    public FeedBack findFeedBackByCommentaire(String commentaire) {
+        Optional<FeedBack> feedBack = this.feedBackRepo.findFeedBackByCommentaire(commentaire);
+        if (feedBack.isEmpty())
+            throw new ResourceNotFoundException("feedback not found");
+        return feedBack.get();
     }
 
     @Override
@@ -37,8 +45,11 @@ feedBack.setCommentaire(new String());
 
     @Override
     public FeedBack updatedFeedBackById(FeedBack feedBack, Integer feedBackId) {
+
        FeedBack feedBackToEdit= this.feedBackRepo.findById(feedBackId).get();
+
         feedBackToEdit.setCommentaire(feedBack.getCommentaire());
+
         feedBackToEdit.setNote(feedBack.getNote());
 
         return this.feedBackRepo.saveAndFlush(feedBackToEdit);
@@ -46,6 +57,7 @@ feedBack.setCommentaire(new String());
 
     @Override
     public void deleteFeedBack(Integer feedBackId) {
+        this.feedBackRepo.deleteById(feedBackId);
 
     }
 }
