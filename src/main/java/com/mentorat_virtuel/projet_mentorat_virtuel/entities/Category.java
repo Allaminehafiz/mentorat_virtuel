@@ -8,7 +8,10 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,11 +29,13 @@ public class Category implements Serializable {
     private Boolean etat;
 
 
+    /*@OneToMany (mappedBy = "Category",
+            cascade = CascadeType.ALL,
+            fetch = FetchType. EAGER,
+            orphanRemoval = true)
+    private List<Ressource> ressources=
+            new ArrayList<>();*/
 
-
-
-    /*@ManyToOne
-    private Ressource ressource;*/
 
 
 }

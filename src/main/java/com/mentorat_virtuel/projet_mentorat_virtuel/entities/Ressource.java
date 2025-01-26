@@ -8,9 +8,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -30,14 +28,9 @@ public class Ressource implements Serializable {
     private Date UpdateAt;
     private Boolean etat;
 
+    /*@ManyToOne
+    private Category category;*/
 
-
-    /*@OneToMany (mappedBy = "Ressource",
-            cascade = CascadeType.ALL,
-            fetch = FetchType. EAGER,
-            orphanRemoval = true)
-    private Set<Category> categories=
-            new HashSet<>();*/
 
 
 
