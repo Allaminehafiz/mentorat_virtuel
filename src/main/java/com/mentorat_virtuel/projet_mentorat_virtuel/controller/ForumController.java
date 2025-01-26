@@ -36,7 +36,7 @@ public class ForumController {
     }
 
     @GetMapping(path = "forum/get_by_description{description}")
-    public ResponseEntity<Forum> getCustomerByTitle(@PathVariable String description){
+    public ResponseEntity<List<Forum>> getCustomerByTitle(@PathVariable String description){
 
         return ResponseEntity
                 .status(200)

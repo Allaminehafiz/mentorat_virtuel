@@ -56,10 +56,11 @@ public class ForumServiceImpl implements ForumService {
     }
 
     @Override
-    public Forum getForumByDescription(String description) {
-        System.out.println("Recherche du forum avec le description : " + description);
-        return this.forumRepo.fetchByDescription(description)
-                .orElseThrow(() -> new ResourceNotFoundException("Description not found: " + description));
+    public List<Forum> getForumByDescription(String description) {
+       List<Forum> forums = forumRepo.fetchByDescription(description);
+       if(forums.isEmpty())
+           throw new RuntimeException("No forum founds");
+        return forums;
     }
 
 
